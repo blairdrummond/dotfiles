@@ -1,0 +1,7 @@
+#!/bin/python3
+
+import sys
+
+for arg in sys.argv[1:]:
+    print('', tuple(int(arg.strip("#")[i:i+2], 16) for i in (0, 2, 4)))
+    print('', tuple(int(arg.strip("#")[i:i+2], 16) / 256.0 for i in (0, 2, 4)))

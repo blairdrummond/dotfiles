@@ -1,0 +1,232 @@
+#!/usr/bin/env bash
+
+# exit 0
+red=$(xrdb -query | grep "\*color1"  | sed '1q' | awk '{print $2}')
+blu=$(xrdb -query | grep "\*color6"  | sed '1q' | awk '{print $2}')
+ylw=$(xrdb -query | grep "\*color7"  | sed '1q' | awk '{print $2}')
+
+
+# theme=$(chtheme current)
+# [ -f ~/.themes/colorschemes/$theme.sh ] && . ~/.themes/colorschemes/$theme.sh
+
+# format an icon
+icon() {
+    printf "%s\\n" "%{F${ylw}}${1}%{F-}"
+}
+
+# get_reminders () {
+# 
+#     left=$(remind -naa ~/desk/remind/top.rem \
+# 	       | grep "$(date +'%Y/%m/%d')" \
+# 	       | awk '{$1=""; print}' \
+# 	       | sort \
+# 	       | sed 's/ today$//' \
+# 	       | sed "s/\(..*\)/%{F$ylw}\1/" \
+# 	       | paste -sd "," -)
+#     
+#     right=$(remind -naa ~/desk/remind/top.rem \
+# 		| grep "$(date -d 'tomorrow' +'%Y/%m/%d')" \
+# 		| awk '{$1=""; print}' \
+# 		| sort \
+# 		| sed 's/ tomorrow$//' \
+# 		| sed "s/\(..*\)/%{F$red}\1%{F-}/" \
+# 		| paste -sd "," -)
+# 
+#     if test -n "$left" && test -n "$right"; then
+# 	
+# 	echo "%{F$blu}{%{F-}$left %{F$blu}|%{F-}$right %{F$blu}}%{F-}"
+# 
+#     elif test -n "$left"; then
+# 
+# 	echo "$left"
+# 
+#     elif test -n "$right"; then
+# 
+# 	echo "$right"
+# 
+#     else
+# 
+# 	echo ""
+# 
+#     fi
+#     
+# }
+
+# get song
+get_song () {
+    if tinympc > /dev/null; then
+	printf "%.75s\\n" "$(icon ) $(tinympc | paste -sd ";" - | sed 's/;/ - /')"
+    else
+	echo ""
+    fi
+    
+}
+
+get_tags () {
+
+    # current=$(herbstclient get_attr my_workgroup)
+    
+    # echo -n " %{F$red}$current: %{F-}"
+    # stuff=$(herbstclient tag_status | tr '\t' '\n' | grep -v "^$" | awk -F '-' '{print $2}' | uniq | paste -sd " " -)
+
+    # echo -n " %{F$blu} $stuff  | " | sed "s/$current/%{F$red}$current%{F$blu}/"
+    
+    # draw tags
+    herbstclient tag_status | tr '\t' '\n' | 
+	while read line; do
+            case ${line:0:1} in
+	    '#')
+                echo -n "%{B-}%{F$red}"
+                ;;
+	    '+')
+                echo -n "%{B-}%{F$mag}"
+                ;;
+	    ':')
+                echo -n "%{B-}%{F$wht}"
+                ;;
+	    '-')
+                echo -n "%{B-}%{F$red}"
+                ;;
+	    '!')
+                echo -n "%{B-}%{F$red}"
+                ;;
+            "")
+                continue
+                ;;
+	    *)
+                echo -n "%{B-}%{F$blu}"
+                ;;
+        esac
+
+	i="${line:1}"
+	j=$(((i+1)%10))
+        echo -n " $j%{F-} "
+
+    done
+
+    
+}
+
+# get clock
+get_clock() {
+    printf "%s\\n" "$(icon ) $(date +'%a %d, %H:%M')"
+        #date +$'date\t%H:%M, %Y-%m-%d'
+}
+
+# get network
+get_network() {
+
+
+    if /sbin/ifconfig tun0 > /dev/null 2>&1; then
+	vpn=''
+    else
+	wifi=$(nmcli radio wifi)
+	if [ $wifi = enabled ]; then
+	    vpn=''
+	fi
+    fi
+
+    ip_ad=$(ip addr | grep wlp2s0 | grep inet | awk '{print $2}')
+    
+    network_id=$(/sbin/iwgetid -r)
+    if [ -n "$network_id" ]
+    then
+	printf "%s\\n" "%{F$blu}{%{F-} $(icon )$(icon $vpn) ${network_id}, ${ip_ad} %{F$blu}}%{F-}"
+    else
+	printf "%s\\n" "%{F$blu}{%{F-} $(icon )$(icon $vpn) offline %{F$blu}}%{F-}"
+    fi
+    
+    
+}
+
+# get battery
+get_battery() {
+    battery_status=$(cat /sys/class/power_supply/BAT1/status)
+    battery_percent=$(cat /sys/class/power_supply/BAT1/capacity)
+    case "$battery_status" in
+        Charging)
+            printf "%s%%\\n" "$(icon ) ${battery_percent}"
+            ;;
+        Discharging)
+            if [ "$battery_percent" -gt 80 ]
+            then
+                printf "%s%%\\n" "$(icon ) ${battery_percent}"
+            elif [ "$battery_percent" -gt 30 ]
+            then
+                printf "%s%%\\n" "$(icon ) ${battery_percent}"
+            else
+                printf "%s%%\\n" "$(icon ) ${battery_percent}"
+            fi
+            ;;
+        Unknown|Full) printf "%s%%\\n" "$(icon ) 100";;
+    esac
+}
+
+
+
+
+check_email () {
+
+    if [ -d ~/mail/gmail ]; then
+	{
+	    # if ! pass email > /dev/null ; then
+            #     echo " $(icon ) signed out "
+	    # else
+
+            mail=$(notmuch count tag:inbox and tag:unread)
+            case $mail in
+		0)
+                ;;
+
+		*)
+                    echo " $(icon ) $mail unread "
+                    ;;
+            esac
+
+	    # fi
+
+
+	    # count="$(notmuch search tag:flagged | wc -l)"
+	    # if [ ! $count -eq 0 ]; then
+	    # 	echo " $(icon ) $count flagged "
+	    # fi
+
+
+
+	    count=$(ls ~/mail/msmtpqueue/ | grep ".mail$" | wc -l)
+	    if [ ! $count -eq 0 ]; then
+		echo " $(icon ) $count enqueued "
+	    fi
+	    
+	} | paste -sd "|" - | sed "s/|/%{F$blu}|/g"
+    fi
+    
+}
+
+case $1 in
+    get_reminders)
+	get_reminders
+	;;
+    get_song)
+	get_song
+	;;
+    get_tags)
+	get_tags
+	;;
+    get_clock)
+	get_clock
+	;;
+    get_network)
+	get_network
+	;;
+    get_battery)
+	get_battery
+	;;
+    check_email)
+	check_email
+	;;
+    *)
+	exit 1
+	;;
+esac
+

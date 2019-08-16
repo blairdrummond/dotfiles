@@ -1,0 +1,3 @@
+#!/bin/sh
+
+head -n 1000 < "$@" | column -s, -n -t | less -#2 -N -S

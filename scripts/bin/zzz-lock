@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# exit 0 # Prevent going to sleep
+
+{
+    amixer sset Speaker mute 
+    amixer set  Speaker 0%   
+} > /dev/null 2>&1
+
+mpc pause
+
+if [ -n $DISPLAY ]; then
+    (slock &) && sudo zzz
+else
+    (vlock &) && sudo zzz
+fi

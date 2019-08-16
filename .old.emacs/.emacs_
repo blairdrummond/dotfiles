@@ -1,0 +1,1382 @@
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(Buffer-menu-use-header-line t)
+ '(Linum-format "%7i ")
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#454545" "#cd5542" "#6aaf50" "#baba36" "#5180b3" "#ab75c3" "#68a5e9" "#bdbdb3"])
+ '(ansi-term-color-vector
+   [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"] t)
+ '(browse-url-browser-function (quote browse-url-generic))
+ '(browse-url-generic-program "qutebrowser")
+ '(column-number-mode t)
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   (quote
+    ("bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "fe1682ca8f7a255cf295e76b0361438a21bb657d8846a05d9904872aa2fb86f2" "748d0e2ffdaf95015a539dcc95ab888283284ad7b076963760422cbe5e21903a" "b65a3bb7dd1c43bf2e301143969a456a5cc380627076196f5529ce8fbf9fb8ac" "d3a7eea7ebc9a82b42c47e49517f7a1454116487f6907cf2f5c2df4b09b50fc1" "0ee3fc6d2e0fc8715ff59aed2432510d98f7e76fe81d183a0eb96789f4d897ca" "44eec3c3e6e673c0d41b523a67b64c43b6e38f8879a7969f306604dcf908832c" "5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "551596f9165514c617c99ad6ce13196d6e7caa7035cea92a0e143dbe7b28be0e" "28d0425aa6445f740b58eed58432a674a2a025c27ec9c535f29ccd4d06dd005c" "611e38c2deae6dcda8c5ac9dd903a356c5de5b62477469133c89b2785eb7a14d" "12e2aee98f651031d10fd58af76250fa8cab6f28b3e88f03b88b7524c9278549" "95f80c9b1ae8afcc2c8d66750252b4d6ae19aef46c2d458c5fe5911e6f09d0ce" "0b6cb9b19138f9a859ad1b7f753958d8a36a464c6d10550119b2838cedf92171" "3629b62a41f2e5f84006ff14a2247e679745896b5eaa1d5bcfbc904a3441b0cd" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bcc6775934c9adf5f3bd1f428326ce0dcd34d743a92df48c128e6438b815b44f" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "b747fb36e99bc7f497248eafd6e32b45613ee086da74d1d92a8da59d37b9a829" "ed317c0a3387be628a48c4bbdb316b4fa645a414838149069210b66dd521733f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "5e2dc1360a92bb73dafa11c46ba0f30fa5f49df887a8ede4e3533c3ab6270e08" "bc40f613df8e0d8f31c5eb3380b61f587e1b5bc439212e03d4ea44b26b4f408a" "cc60d17db31a53adf93ec6fad5a9cfff6e177664994a52346f81f62840fe8e23" "938d8c186c4cb9ec4a8d8bc159285e0d0f07bad46edf20aa469a89d0d2a586ea" "fb0234f37de07754227864ceb11bad7d7decc74d2853ac635f9f8715ba917a20" "50d07ab55e2b5322b2a8b13bc15ddf76d7f5985268833762c500a90e2a09e7aa" "527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "6271fc9740379f8e2722f1510d481c1df1fcc43e48fa6641a5c19e954c21cc8f" "5228973368d5a1ac0cbea0564d0cd724937f52cc06a8fd81fc65a4fa72ff837b" "760ce657e710a77bcf6df51d97e51aae2ee7db1fba21bbad07aab0fa0f42f834" "60e09d2e58343186a59d9ed52a9b13d822a174b33f20bdc1d4abb86e6b17f45b" "5b8eccff13d79fc9b26c544ee20e1b0c499587d6c4bfc38cabe34beaf2c2fc77" "b3bcf1b12ef2a7606c7697d71b934ca0bdd495d52f901e73ce008c4c9825a3aa" "dd4628d6c2d1f84ad7908c859797b24cc6239dfe7d71b3363ccdd2b88963f336" "6daa09c8c2c68de3ff1b83694115231faa7e650fdbb668bc76275f0f2ce2a437" "4feee83c4fbbe8b827650d0f9af4ba7da903a5d117d849a3ccee88262805f40d" "a25c42c5e2a6a7a3b0331cad124c83406a71bc7e099b60c31dc28a1ff84e8c04" "78c1c89192e172436dbf892bd90562bc89e2cc3811b5f9506226e735a953a9c6" "6c35ffc17f8288be4c7866deb7437e8af33cd09930e195738cdfef911ab77274" "b9b1a8d2ec1d5c17700e1a09256f33c2520b26f49980ed9e217e444c381279a9" "d29231b2550e0d30b7d0d7fc54a7fb2aa7f47d1b110ee625c1a56b30fea3be0f" "55d31108a7dc4a268a1432cd60a7558824223684afecefa6fae327212c40f8d3" default)))
+ '(face-font-family-alternatives
+   (quote
+    (("Sgiscreen")
+     ("Monospace" "courier" "fixed")
+     ("Monospace Serif" "Courier 10 Pitch" "Consolas" "Courier Std" "FreeMono" "Nimbus Mono L" "courier" "fixed")
+     ("courier" "CMU Typewriter Text" "fixed")
+     ("Sans Serif" "helv" "helvetica" "arial" "fixed")
+     ("helv" "helvetica" "arial" "fixed"))))
+ '(fci-rule-character-color "#192028")
+ '(fci-rule-color "#192028")
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(fringe-mode 4 nil (fringe))
+ '(global-company-mode t)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#073642" . 0)
+     ("#546E00" . 20)
+     ("#00736F" . 30)
+     ("#00629D" . 50)
+     ("#7B6000" . 60)
+     ("#8B2C02" . 70)
+     ("#93115C" . 85)
+     ("#073642" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+ '(hl-fg-colors
+   (quote
+    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(ivy-display-style nil)
+ '(ivy-format-function (quote ivy-format-function-arrow))
+ '(ivy-height 20)
+ '(ivy-mode t)
+ '(ivy-use-virtual-buffers t)
+ '(magit-diff-use-overlays nil)
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style (quote chamfer))
+ '(menu-bar-mode nil)
+ '(message-confirm-send t)
+ '(midnight-mode t)
+ '(neo-theme (quote nerd))
+ '(neo-window-fixed-size nil)
+ '(notmuch-message-headers (quote ("Subject" "To" "Cc" "Date" "User-Agent")))
+ '(notmuch-message-headers-visible nil)
+ '(notmuch-poll-script "mail-update")
+ '(notmuch-search-oldest-first nil)
+ '(notmuch-search-result-format (quote (("authors" . "%-30s ") ("subject" . "%s "))))
+ '(notmuch-show-all-multipart/alternative-parts t)
+ '(notmuch-show-all-tags-list t)
+ '(notmuch-show-imenu-indent t)
+ '(notmuch-show-indent-messages-width 6)
+ '(notmuch-show-indent-multipart t)
+ '(notmuch-show-insert-text/plain-hook
+   (quote
+    (notmuch-wash-convert-inline-patch-to-part notmuch-wash-wrap-long-lines notmuch-wash-tidy-citations notmuch-wash-elide-blank-lines notmuch-wash-excerpt-citations)))
+ '(notmuch-show-logo nil)
+ '(notmuch-show-text/html-blocked-images nil)
+ '(notmuch-tag-formats
+   (quote
+    (("unread"
+      (propertize tag
+		  (quote face)
+		  (quote notmuch-tag-unread)))
+     ("flagged"
+      (notmuch-apply-face tag
+			  (quote
+			   (:weight bold)))
+      (notmuch-tag-format-image-data tag
+				     (notmuch-tag-star-icon))
+      (propertize tag
+		  (quote face)
+		  (quote notmuch-tag-flagged))))))
+ '(notmuch-tree-result-format
+   (quote
+    (("date" . "%12s  ")
+     ("authors" . "%-30s")
+     ((("tree" . "%s")
+       ("subject" . "%s"))
+      . " %-54s "))))
+ '(nrepl-message-colors
+   (quote
+    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(org-agenda-window-setup (quote other-window))
+ '(org-from-is-user-regexp "\\<blair\\>")
+ '(org-highlight-latex-and-related (quote (latex script entities)))
+ '(org-src-fontify-natively t)
+ '(package-selected-packages
+   (quote
+    (anything pdf-tools paperless paper-theme melancholy-theme lavender-theme jazz-theme creamsody-theme birds-of-paradise-plus-theme alect-themes abyss-theme zerodark-theme hydra spaceline projectile doom-themes ujelly-theme grandshell-theme monokai-theme nm zenburn-theme color-theme-sanityinc-tomorrow hc-zenburn-theme dired-hide-dotfiles vdiff dired-details dired-ranger dashboard smooth-scrolling spray suscolors-theme twilight-anti-bright-theme soothe-theme silkworm-theme cherry-blossom-theme ample-theme darktooth-theme lenlen-theme solarized-theme muttrc-mode centered-cursor-mode which-key white-sand-theme nord-theme openwith smex counsel neotree transpose-frame ivy ace-flyspell avy-flycheck auto-complete flyspell-correct-popup writeroom-mode rainbow-delimiters)))
+ '(paperless-capture-directory "/home/blair/desk/tmp/")
+ '(paperless-root-directory "/home/blair/desk/papers/")
+ '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111")
+ '(scroll-bar-mode nil)
+ '(send-mail-function (quote smtpmail-send-it))
+ '(show-paren-mode t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(smooth-scrolling-mode t)
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
+ '(tool-bar-mode nil)
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#c85d17")
+     (60 . "#be730b")
+     (80 . "#b58900")
+     (100 . "#a58e00")
+     (120 . "#9d9100")
+     (140 . "#959300")
+     (160 . "#8d9600")
+     (180 . "#859900")
+     (200 . "#669b32")
+     (220 . "#579d4c")
+     (240 . "#489e65")
+     (260 . "#399f7e")
+     (280 . "#2aa198")
+     (300 . "#2898af")
+     (320 . "#2793ba")
+     (340 . "#268fc6")
+     (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "GohuFont" :foundry "Gohu" :slant normal :weight normal :height 105 :width normal))))
+ '(company-echo-common ((t (:foreground "firebrick1" :inverse-video t))))
+ '(company-tooltip ((t (:foreground "blue"))))
+ '(font-latex-verbatim-face ((t (:inherit nil :foreground "burlywood"))))
+ '(header-line ((t (:inherit message-header-subject))))
+ '(ivy-current-match ((t (:background "white" :foreground "black"))))
+ '(ivy-minibuffer-match-face-2 ((t (:foreground "blue" :weight bold))))
+ '(markdown-code-face ((t (:background "#343434"))))
+ '(markdown-inline-code-face ((t (:foreground "#cc99cc"))))
+ '(markdown-pre-face ((t nil)))
+ '(mode-line ((t (:foreground "magenta"))))
+ '(mode-line-buffer-id ((t nil)))
+ '(mode-line-highlight ((t (:box nil))))
+ '(notmuch-search-unread-face ((t (:foreground "yellow" :weight bold))))
+ '(variable-pitch ((t nil))))
+
+ ;; '(mode-line ((t (:foreground "magenta"))))
+ ;; '(mode-line ((t (:foreground "black" :background "cyan"))))
+
+
+
+
+;; '(TeX-view-program-list (quote (("mupdf" "mupdf-x11 %o"))))
+;; '(TeX-view-program-selection
+;;   (quote
+;;    (((output-dvi style-pstricks)
+;;      "dvips and gv")
+;;     (output-dvi "xdvi")
+;;     (output-pdf "mupdf")
+;;     (output-html "xdg-open"))))
+
+
+
+
+
+;; (add-to-list 'load-path "~/.emacs.d/org-mode/lisp")
+;; (load "org-mode")
+
+(set-face-attribute 'fringe nil :background nil)
+;; (setq use-file-dialog nil)
+
+;; Add Melpa packages
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://melpa.org/packages/")
+ t)
+(package-initialize)
+
+
+(require 'evil)
+(evil-mode 1)
+(setq evil-default-state 'normal)
+(define-key evil-normal-state-map (kbd ";") 'evil-ex)
+;; (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
+
+
+(defun copy-to-end-of-line ()
+  (interactive)
+  (evil-yank (point) (point-at-eol)))
+
+(define-key evil-normal-state-map "Y" 'copy-to-end-of-line)
+
+;; These get me all the time.
+(evil-ex-define-cmd "E[dit]" 'evil-edit)
+(evil-ex-define-cmd "W[rite]" 'evil-write)
+
+
+;; Indent whole region sensibly
+(defun evil-shift-right-and-indent()
+  (interactive)
+  (evil-indent (region-beginning) (region-end))
+  (indent-region (region-beginning) (region-end)))
+
+(define-key evil-visual-state-map ">" 'evil-shift-right-and-indent)
+(define-key evil-visual-state-map (kbd "TAB") 'indent-region)
+
+(defun newline-without-break-of-line ()
+  (interactive)
+  (let ((oldpos (point)))
+    (end-of-line)
+    (newline-and-indent)))
+(define-key evil-normal-state-map "\\" 'newline-without-break-of-line)
+
+
+;; Make movement keys work like they should
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+					; Make horizontal movement cross lines
+(setq-default evil-cross-lines t)
+
+;; yes/no -> y/n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+
+
+
+;; M-w already works, but sometimes I want these...
+;; I like being able to copy in insert mode in particular
+(define-key evil-normal-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-y" 'yank)
+(define-key evil-normal-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-a" 'evil-beginning-of-line)
+(define-key evil-insert-state-map "\C-e"
+  (lambda () (interactive)
+    (evil-end-of-line)
+    (forward-char)))
+
+
+
+
+;; Rainbow Brackets
+(require 'rainbow-delimiters)
+(mapc (lambda (x) (add-hook x #'rainbow-delimiters-mode))
+    '(
+	python-mode-hook
+	latex-mode-hook
+	LaTeX-mode-hook
+	markdown-mode-hook
+	emacs-lisp-mode-hook
+	haskell-mode-hook
+	ess-mode-hook
+	))
+
+
+;; Python settings
+
+(elpy-enable)
+(elpy-use-ipython)
+
+;; use flycheck not flymake with elpy
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+;; enable autopep8 formatting on save
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+(setq python-shell-interpreter "ipython3"
+       python-shell-interpreter-args "--simple-prompt -i")
+;; (setq-default py-shell-name "ipython")
+;; (setq-default py-which-bufname "IPython")
+;; ; use the wx backend, for both mayavi and matplotlib
+;; (setq py-python-command-args
+;;   '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+;; (setq py-force-py-shell-name-p t)
+
+;; ; switch to the interpreter after executing code
+;; (setq py-shell-switch-buffers-on-execute-p t)
+;; (setq py-switch-buffers-on-execute-p t)
+;; ; don't split windows
+;; (setq py-split-windows-on-execute-p nil)
+;; ; try to automagically figure out indentation
+;; (setq py-smart-indentation t)
+
+
+;;(defun my-python-send-statement ()
+;;  (interactive)
+;;  (local-set-key [S-return] 'my-python-send-statement)
+;;  (end-of-line)
+;;  (set-mark (line-beginning-position))
+;;  (call-interactively 'python-shell-send-region)
+;;  (python-shell-send-string)
+;;  (c)
+;;  )
+
+(evil-define-key 'normal python-mode-map "\M- " 'elpy-shell-send-current-statement)
+(evil-define-key 'insert python-mode-map "\M- " 'elpy-shell-send-current-statement)
+
+(when (get-buffer "*Messages*")
+(kill-buffer "*Messages*"))
+
+
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key "\C-s" 'swiper)
+(define-key evil-normal-state-map (kbd "/") 'swiper)
+
+
+
+;; (setq make-backup-files nil)
+(setq backup-directory-alist `(("." . "~/log/saves")))
+
+
+
+(require 'ibuffer)
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+	       ("Pdf" (name . ".*\\.pdf"))
+	       ("Text" (or (name . ".*\\.txt")
+			   (name . ".*\\.md")
+			   (name . ".*\\.tex")
+			   (name . ".*\\.org")
+			   ))
+	       ("Notmuch" (or (name . "\\*notmuch.*")
+			      (name . "\\*unsent.*")))
+	       ("Programming" ;; prog stuff not already in MyProjectX
+		(or
+		 (mode . haskell-mode)
+		 (mode . python-mode)
+		 (mode . emacs-lisp-mode)
+		 (mode . sh-mode)
+		 (mode . ess-mode)
+		 ))
+	       ("Tramp" (filename . "/ssh:.*"))
+	       ("Folder" (mode . dired-mode))
+	       ("emacs" (or (filename . ".*\\.emacs")
+			    (filename . ".*\\.github-files")
+			    (filename . ".*\\.scratchpad")
+			    (filename . ".*\\.temp")))
+	       ("*running*" (or
+			      (mode . shell-mode)
+			      (name . "\\*R\\*")))
+	       ("*buffer*" (name . "\\*.*\\*"))))))
+
+
+(add-hook 'ibuffer-mode-hook
+  (lambda ()
+    (ibuffer-switch-to-saved-filter-groups "default")))
+
+(defalias 'list-buffers 'ivy-switch-buffer)
+(defalias 'buffer-menu 'ibuffer)
+
+(setq ibuffer-formats
+   (quote
+    ((mark modified read-only " "
+	   (name 30 30 :left :elide)
+	   " "
+	   (mode 16 16 :left :elide)
+	   " " filename-and-process)
+     (mark " "
+	   (name 16 -1)
+	   " " filename))))
+
+
+
+(defun switch-bury-or-kill-buffer (&optional aggr)
+  "With no argument, switch (but unlike C-x b, without the need
+to confirm).  With C-u, bury current buffer.  With double C-u,
+kill it (unless it's modified)."
+  (interactive "P")
+  (cond
+   ((eq aggr nil) (progn
+                    (cl-dolist (buf '("*Buffer List*" "*IBuffer*"))
+                      (when (get-buffer buf)
+                        (bury-buffer buf)))
+                    (switch-to-buffer (other-buffer))))
+   ((equal aggr '(4)) (bury-buffer))
+   ((equal aggr '(16)) (kill-buffer-if-not-modified (current-buffer)))))
+
+(global-set-key (kbd "C-TAB") 'switch-bury-or-kill-buffer)
+(define-key evil-normal-state-map (kbd "C-TAB") 'switch-bury-or-kill-buffer)
+
+(define-key evil-normal-state-map (kbd "C-d") 'kill-buffer)
+
+
+
+
+
+;; (require 'openwith)
+;; (setq openwith-associations '(("\\.pdf\\'"  "mupdf-x11" (file))
+;; 			      ("\\.png\\'"  "feh" (file))
+;; 			      ("\\.jpg\\'"  "feh" (file))
+;; 			      ("\\.jpeg\\'" "feh" (file))))
+;; (openwith-mode t)
+
+
+
+
+
+
+;; Ignore Whitespace in ediff mode
+(setq ediff-diff-options "-w")
+
+
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
+
+
+
+
+(require 'transpose-frame)
+(global-set-key (kbd "C-c C-w r") 'rotate-frame)
+(global-set-key (kbd "C-c C-w t") 'transpose-frame)
+(global-set-key (kbd "C-c C-w h") 'flop-frame)
+(global-set-key (kbd "C-c C-w v") 'flip-frame)
+
+(evil-ex-define-cmd "tr" 'rotate-frame)
+(evil-ex-define-cmd "tt" 'transpose-frame)
+(evil-ex-define-cmd "th" 'flop-frame)
+(evil-ex-define-cmd "tv" 'flip-frame)
+
+
+
+(define-key evil-emacs-state-map "\M-k" 'windmove-up)
+(define-key evil-emacs-state-map "\M-j" 'windmove-down)
+(define-key evil-emacs-state-map "\M-h" 'windmove-left)
+(define-key evil-emacs-state-map "\M-l" 'windmove-right)
+
+
+(define-key evil-normal-state-map "\M-k" 'windmove-up)
+(define-key evil-normal-state-map "\M-j" 'windmove-down)
+(define-key evil-normal-state-map "\M-h" 'windmove-left)
+(define-key evil-normal-state-map "\M-l" 'windmove-right)
+
+
+
+
+
+(setq-default TeX-PDF-mode t)
+(fset 'tex-font-lock-suscript 'ignore)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'markdown-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 
+          (lambda()
+             (reftex-mode)
+             (define-key reftex-toc-mode-map "\M- " 'reftex-toc-quit)
+             (define-key reftex-toc-mode-map "j" 'next-line)
+             (define-key reftex-toc-mode-map "k" 'previous-line)
+             (setq TeX-save-query nil)
+             (setq TeX-show-compilation nil)))
+
+(evil-define-key 'normal LaTeX-mode-map "\M- " 'reftex-toc)
+
+;; Auto-Complete
+;; (ac-config-default)
+; (add-to-list 'company-backends 'company-jedi)
+
+
+
+;;   ;;; N-Gram company
+;;   (with-eval-after-load 'company-ngram
+;;     ; ~/data/ngram/*.txt are used as data
+;;     (setq company-ngram-data-dir "~/data/ngram")
+;;     ; company-ngram supports python 3 or newer
+;;     (setq company-ngram-python "python3")
+;;     (company-ngram-init)
+;;     (cons 'company-ngram-backend company-backends)
+;;     ; or use `M-x turn-on-company-ngram' and
+;;     ; `M-x turn-off-company-ngram' on individual buffers
+;;     ;
+;;     ; save the cache of candidates
+;;     (run-with-idle-timer 7200 t
+;;                          (lambda ()
+;;                            (company-ngram-command "save_cache")
+;;                            ))
+;;     )
+;;   
+;;   (require 'company-ngram nil t)
+
+
+
+
+
+
+(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'LaTeX-mode-hook     'flyspell-mode)
+(add-hook 'org-mode-hook       'flyspell-mode)
+(add-hook 'markdown-mode-hook  'flyspell-mode)
+(add-hook 'message-mode-hook  'flyspell-mode)
+
+(require 'ace-flyspell)
+(defun jump-correct ()
+  (interactive)
+  (ace-flyspell-jump-word)
+  (flyspell-popup-correct))
+(define-key evil-normal-state-map "z " 'jump-correct)
+
+(add-hook 'flyspell-mode-hook #'flyspell-popup-auto-correct-mode)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(defun clever-insert-item ()
+  "Clever insertion of org item."
+  (if (not (org-in-item-p))
+      (insert "\n")
+    (org-insert-item)))
+
+(defun evil-org-eol-call (fun)
+  "Go to end of line and call provided function.
+FUN function callback"
+  (end-of-line)
+  (funcall fun)
+  (evil-append nil))
+
+
+
+;; normal state shortcuts
+(evil-define-key 'normal org-mode-map
+  "gh" 'outline-up-heading
+  "gp" 'outline-previous-heading
+  "gj" (if (fboundp 'org-forward-same-level) ;to be backward compatible with older org version
+	   'org-forward-same-level
+	  'org-forward-heading-same-level)
+  "gk" (if (fboundp 'org-backward-same-level)
+	   'org-backward-same-level
+	  'org-backward-heading-same-level)
+  "gl" 'outline-next-visible-heading
+  (kbd "<SPC>") 'org-toggle-checkbox
+  (kbd "C-t") 'org-set-tags-command
+  "t" 'org-todo
+  "gt" '(lambda () (interactive) (evil-org-eol-call (lambda() (org-insert-todo-heading nil))))
+  "H" 'org-shiftleft
+  "L" 'org-shiftright
+  "$" 'org-end-of-line
+  "^" 'org-beginning-of-line
+  "-" 'org-cycle-list-bullet
+  (kbd "<tab>") 'org-cycle)
+
+;; normal & insert state shortcuts.
+(evil-define-key 'insert org-mode-map
+  (kbd "M-i") 'cdlatex-environment
+  (kbd "M-l") 'org-metaright
+  (kbd "M-l") 'org-metaright
+  (kbd "M-h") 'org-metaleft
+  (kbd "M-k") 'org-metaup
+  (kbd "M-j") 'org-metadown
+  (kbd "M-L") 'org-shiftmetaright
+  (kbd "M-H") 'org-shiftmetaleft
+  (kbd "M-K") 'org-shiftmetaup
+  (kbd "M-J") 'org-shiftmetadown
+  (kbd "M-o") '(lambda () (interactive)
+		 (evil-org-eol-call
+		  '(lambda()
+		     (org-insert-heading)
+		     (org-metaright))))
+  (kbd "M-t") '(lambda () (interactive)
+		 (evil-org-eol-call
+		  '(lambda()
+		     (org-insert-todo-heading nil)
+		     (org-metaright)))))
+
+;; normal & insert state shortcuts.
+(evil-define-key 'normal org-mode-map
+  (kbd "M-l") 'org-metaright
+  (kbd "M-l") 'org-metaright
+  (kbd "M-h") 'org-metaleft
+  (kbd "M-k") 'org-metaup
+  (kbd "M-j") 'org-metadown
+  (kbd "M-L") 'org-shiftmetaright
+  (kbd "M-H") 'org-shiftmetaleft
+  (kbd "M-K") 'org-shiftmetaup
+  (kbd "M-J") 'org-shiftmetadown
+  (kbd "M-o") '(lambda () (interactive)
+		 (evil-org-eol-call
+		  '(lambda()
+		     (org-insert-heading)
+		     (org-metaright))))
+  (kbd "M-t") '(lambda () (interactive)
+		 (evil-org-eol-call
+		  '(lambda()
+		     (org-insert-todo-heading nil)
+		     (org-metaright)))))
+
+
+
+
+(evil-define-key 'normal org-mode-map
+  (kbd "RET") 'org-open-at-point
+  "za"        'org-cycle
+  "zA"        'org-shifttab
+  "zi"        'cdlatex-environment
+  "zm"        'hide-body
+  "zr"        'show-all
+  "zo"        'show-subtree
+  "zO"        'show-all
+  "zc"        'hide-subtree
+  "zC"        'hide-all
+  (kbd "M-j") 'org-shiftleft
+  (kbd "M-k") 'org-shiftright
+  (kbd "M-H") 'org-metaleft
+  (kbd "M-J") 'org-metadown
+  (kbd "M-K") 'org-metaup
+  (kbd "M-L") 'org-metaright)
+
+
+
+(add-hook 'org-mode-hook 'visual-line-mode)
+;; ;; (setq org-agenda-files (list "~/log/org/work.org" "~/log/org/school.org" "~/log/org/other.org" "~/log/org/software.org"))
+;; (setq org-agenda-files (list "/home/blair/todo.org"))
+
+;; (org-todo-list)
+
+(global-set-key (kbd "M-a") 'org-todo-list)
+
+;; (require 'org-alert)
+;; (org-alert-enable)
+;; (setq alert-default-style 'libnotify)
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((emacs-lisp . t)
+;;    (latex . t)   ;; <== add latex to the list
+;;    (python . t)
+;;    (shell . t)))
+
+;; (require 'org)
+;; (let ((current-prefix-arg 1))
+;;   (call-interactively 'org-reload))
+
+
+
+(evil-ex-define-cmd "Tree" 'neotree-toggle)
+(define-key evil-normal-state-map (kbd "TAB") 'neotree-toggle)
+(setq neo-smart-open t)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "q")   'neotree-hide)
+
+
+
+
+
+
+(global-set-key (kbd "M-x") 'counsel-M-x)
+
+
+
+
+; (load "~/.src/centering-window-mode/centering-window-mode.el")
+;; (centering-window-mode)
+
+
+
+(setq vc-follow-symlinks t)
+
+
+(which-key-mode)
+
+
+(defun w3mext-open-link-or-image-or-url ()
+  "Opens the current link or image or current page's uri or any url-like text under cursor in firefox."
+  (interactive)
+  (let (url)
+    (if (string= major-mode "w3m-mode")
+        (setq url (or (w3m-anchor) (w3m-image) w3m-current-url)))
+    (browse-url-generic (if url url (car (browse-url-interactive-arg "URL: "))))
+    ))
+(global-set-key (kbd "C-c b") 'w3mext-open-link-or-image-or-url) 
+
+
+
+
+
+;; (and
+;;  (require 'centered-cursor-mode)
+;;  (global-centered-cursor-mode +1))
+
+
+
+(evil-define-key 'normal ess-mode-map "\M- " 'ess-eval-region-or-line-and-step)
+(evil-define-key 'insert ess-mode-map "\M- " 'ess-eval-region-or-line-and-step)
+
+
+
+;;; Fully undo the effects of one theme when loading
+(defadvice load-theme
+    (before theme-dont-propagate activate)
+  (mapc #'disable-theme custom-enabled-themes))
+
+;; Get rid of the modeline box, and remove the fringe
+(defadvice load-theme
+    (after theme-dont-propagate activate)
+    (set-face-attribute 'mode-line nil :foreground "white")
+   )
+
+
+
+
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
+
+
+
+
+
+
+; (require 'dashboard)
+; (dashboard-setup-startup-hook)
+
+
+
+;; Set the title
+; (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+;; Set the banner
+;; (setq dashboard-startup-banner [VALUE])
+;; Value can be
+;; 'official which displays the official emacs logo
+;; 'logo which displays an alternative emacs logo
+;; 1, 2 or 3 which displays one of the text banners
+;; "path/to/your/image.png which displays whatever image you would prefer
+;; To customize which widgets are displayed, you can use the following snippet
+
+;; (setq dashboard-items '((recents  . 5)
+;;                         (bookmarks . 5)
+;;                         (projects . 5)
+;;                         (agenda . 5)))
+
+
+
+
+
+
+
+
+
+(defun my-dired-mode-hook ()
+  "My `dired' mode hook."
+  ;; To hide dot-files by default
+  (dired-hide-dotfiles-mode)
+
+  ;; To toggle hiding
+  (define-key dired-mode-map "h" #'dired-hide-dotfiles-mode)
+  (evil-define-key 'normal dired-mode-map "h" #'dired-hide-dotfiles-mode))
+
+(add-hook 'dired-mode-hook #'my-dired-mode-hook)
+
+
+
+
+
+
+
+
+;;  (require 'evil-magit)
+
+
+
+
+
+
+
+
+
+ ;; (setq tabbar-ruler-global-ruler t) ; if you want a global ruler
+ ;; (setq tabbar-ruler-popup-menu t) ; If you want a popup menu.
+ ;; (setq tabbar-ruler-popup-toolbar t) ; If you want a popup toolbar
+ ;; (setq tabbar-ruler-popup-scrollbar t) ; If you want to only show the
+                                        ; scroll bar when your mouse is moving.
+ ;; (require 'tabbar-ruler)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; (autoload 'notmuch "notmuch" "notmuch mail" t)
+(require 'notmuch)
+;; (evil-set-initial-state 'notmuch-message-mode 'emacs)
+(evil-set-initial-state 'notmuch-tree-mode 'emacs)
+(evil-set-initial-state 'nm-mode 'emacs)
+(evil-set-initial-state 'paperless-mode 'emacs)
+
+(evil-set-initial-state 'pdf-annot-list-mode  'emacs)
+(evil-set-initial-state 'pdf-occur-mode       'emacs)
+(evil-set-initial-state 'fundamental-mode     'emacs)
+
+(setq message-kill-buffer-on-exit t) ; kill buffer after sending mail)
+(setq mail-specify-envelope-from t) ; Settings to work with msmtp
+
+
+;; This is needed to allow msmtp to do its magic:
+(setq message-sendmail-f-is-evil 't)
+
+;;need to tell msmtp which account we're using
+(setq message-send-mail-function 'message-send-mail-with-sendmail)
+(setq sendmail-program "/usr/bin/msmtp"
+      mail-specify-envelope-from t
+      ;; needed for debians message.el cf. README.Debian.gz
+      message-sendmail-f-is-evil nil
+      mail-envelope-from 'header
+      notmuch-message-headers '("Subject" "To" "Cc" "Date" "User-Agent")
+      message-sendmail-envelope-from 'header)
+
+
+
+;A few commonly used saved searches. 
+(add-hook 'notmuch-hello-mode-hook 
+	  (lambda () (interactive) (setq notmuch-saved-searches
+;; (quote
+;; ((:name "inbox"   :query "tag:unread and -tag:sent or tag:urgent or tag:inbox and -tag:bills and -tag:newsletters and -tag:social and -tag:orders and -tag:sent and -tag:drafts" :key "i")
+;;  (:name "flagged" :query "tag:flagged" :key "f") ;flagged messages
+;;  (:name "sent"    :query "tag:sent -tag:work" :key "t")
+;;  (:name "drafts"  :query "tag:draft" :key "d") 
+;;  (:name "all mail" :query "*" :key "a"))))))
+ 
+(quote 
+((:name   "inbox"      :key  "i"  :query "tag:myself or not tag:sent and not tag:bills and not tag:newsletters and not ta\
+g:social and not tag:orders and not tag:drafts and not tag:spam and date:6M..now")
+(:name   "urgent"      :key  "u"  :query "tag:urgent")
+(:name   "work"        :key  "w"  :query "tag:work")
+(:name   "sent"        :key  "s"  :query "tag:sent")
+(:name   "starred"     :key  " "  :query "tag:flagged")
+;; (:name   "newsletters" :key  "n"  :query "tag:newsletters")
+;; (:name   "social"      :key  "f"  :query "tag:social")
+;; (:name   "bills"       :key  "b"  :query "tag:bills")
+(:name   "all"         :key  "a"  :query "tag:inbox")
+(:name   "drafts"      :key  "d"  :query "tag:drafts")
+(:name   "trash"       :key  "t"  :query "tag:trash")
+(:name   "spam"        :key  "x"  :query "tag:spam"))))))
+
+
+
+;   ;Message composition and sending settings
+;   
+;   ;Setup User-Agent header
+;   (setq mail-user-agent 'message-user-agent)
+;   
+;   (setq message-kill-buffer-on-exit t) ; kill buffer after sending mail)
+;   (setq mail-specify-envelope-from t) ; Settings to work with msmtp
+;   
+;   (setq send-mail-function (quote sendmail-send-it))
+;   (setq sendmail-program "~/.local/bin/msmtp-enqueue.sh"
+;     mail-specify-envelope-from t
+;   ;; needed for debians message.el cf. README.Debian.gz
+;    message-sendmail-f-is-evil nil
+;     mail-envelope-from 'header
+;     message-sendmail-envelope-from 'header)
+
+
+               ;;; Reading mail settings:
+
+               (define-key notmuch-show-mode-map "S"
+                   (lambda ()
+                   "mark message as spam"
+                   (interactive)
+               (notmuch-show-tag (list "+spam" "-inbox"))))
+               
+               (define-key notmuch-search-mode-map "S"
+               (lambda ()
+                   "mark message as spam"
+                   (interactive)
+                   (notmuch-search-tag (list "-inbox" "+spam"))
+                   (next-line) ))
+
+
+
+
+;; (setq mm-sign-option 'guided)
+;; (setq notmuch-crypto-process-mime t)
+;; (add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
+
+
+;;
+;;
+;;    ;Crypto Settings 
+;;    
+;;    (setq epg-gpg-program "/usr/bin/gpg")
+;;    
+;;    ;There was some problem with listing PGP keys in the Debian
+;;    ;version of EPG. This magic from StackOverflow seems to resolve it.
+;;    (defun epg--list-keys-1 (context name mode)
+;;    (let ((args (append (if (epg-context-home-directory context)
+;;              (list "--homedir"
+;;                (epg-context-home-directory context)))
+;;              '("--with-colons" "--no-greeting" "--batch"
+;;            "--with-fingerprint" "--with-fingerprint")
+;;              (unless (eq (epg-context-protocol context) 'CMS)
+;;            '("--fixed-list-mode"))))
+;;    (list-keys-option (if (memq mode '(t secret))
+;;                  "--list-secret-keys"
+;;                (if (memq mode '(nil public))
+;;                "--list-keys"
+;;                  "--list-sigs")))
+;;    (coding-system-for-read 'binary)
+;;    keys string field index)
+;;    (if name
+;;    (progn
+;;      (unless (listp name)
+;;        (setq name (list name)))
+;;      (while name
+;;        (setq args (append args (list list-keys-option (car name)))
+;;          name (cdr name))))
+;;      (setq args (append args (list list-keys-option))))
+;;    (with-temp-buffer
+;;      (apply #'call-process
+;;         (epg-context-program context)
+;;         nil (list t nil) nil args)
+;;      (goto-char (point-min))
+;;      (while (re-search-forward "^[a-z][a-z][a-z]:.*" nil t)
+;;    (setq keys (cons (make-vector 15 nil) keys)
+;;          string (match-string 0)
+;;          index 0
+;;          field 0)
+;;    (while (and (< field (length (car keys)))
+;;            (eq index
+;;            (string-match "\\([^:]+\\)?:" string index)))
+;;      (setq index (match-end 0))
+;;      (aset (car keys) field (match-string 1 string))
+;;      (setq field (1+ field))))
+;;      (nreverse keys))))
+
+
+
+
+
+
+;; (helm-add-action-to-source "Attach to Email" #'mml-attach-file helm-source-locate)
+
+(defun my-notmuch-show-view-as-patch ()
+  "View the the current message as a patch."
+  (interactive)
+  (let* ((id (notmuch-show-get-message-id))
+         (msg (notmuch-show-get-message-properties))
+         (part (notmuch-show-get-part-properties))
+         (subject (concat "Subject: " (notmuch-show-get-subject) "\n"))
+         (diff-default-read-only t)
+         (buf (get-buffer-create (concat "*notmuch-patch-" id "*")))
+         (map (make-sparse-keymap)))
+    (define-key map "q" 'notmuch-bury-or-kill-this-buffer)
+    (switch-to-buffer buf)
+    (let ((inhibit-read-only t))
+      (erase-buffer)
+      (insert subject)
+      (insert (notmuch-get-bodypart-text msg part nil)))
+    (set-buffer-modified-p nil)
+    (diff-mode)
+    (lexical-let ((new-ro-bind (cons 'buffer-read-only map)))
+                 (add-to-list 'minor-mode-overriding-map-alist new-ro-bind))
+    (goto-char (point-min))))
+
+;; and then this function needs to bound to . d in the keymap
+
+;; (define-key 'notmuch-show-part-map "d" 'my-notmuch-show-view-as-patch)
+
+
+
+(defun notmuch-delete ()
+  "Delete it."
+  (interactive)
+  (when (y-or-n-p "Delete This Message?")
+    (notmuch-search-tag '("+deleted" "-unread" "-inbox"))
+    (forward-line)
+    (notmuch-search-refresh-view)))
+
+
+
+(defun notmuch-flag ()
+        "toggle deleted tag for message"
+        (interactive)
+        (if (member "flagged" (notmuch-search-get-tags))
+            (notmuch-search-tag (list "-flagged"))
+          (notmuch-search-tag (list "+flagged")))
+	(notmuch-search-refresh-view))
+
+
+
+
+
+(define-key notmuch-show-mode-map "d" 'notmuch-delete)
+(define-key notmuch-show-mode-map "f" 'notmuch-flag)
+
+
+(add-to-list 'auto-mode-alist '("mutt.*" . message-mode))
+
+
+(define-key notmuch-show-mode-map "j" 'next-line)
+(define-key notmuch-show-mode-map "k" 'previous-line)
+(define-key notmuch-show-mode-map ":" 'evil-ex)
+
+(define-key notmuch-search-mode-map "G" 'end-of-buffer)
+(define-key notmuch-search-mode-map "g" 'beginning-of-buffer)
+(define-key notmuch-search-mode-map "j" 'next-line)
+(define-key notmuch-search-mode-map "k" 'previous-line)
+(define-key notmuch-search-mode-map ":" 'evil-ex)
+(define-key notmuch-search-mode-map " " 'notmuch-jump-search)
+(define-key notmuch-search-mode-map "i" 'notmuch-jump-tag)
+(define-key notmuch-search-mode-map "/" 'notmuch-search-filter)
+(define-key notmuch-search-mode-map "u" 'notmuch-poll-and-refresh-this-buffer)
+
+
+(evil-define-key 'emacs notmuch-show-mode-map "j" 'next-line)
+(evil-define-key 'emacs notmuch-show-mode-map "k" 'previous-line)
+(evil-define-key 'emacs notmuch-show-mode-map ":" 'evil-ex)
+
+(evil-define-key 'emacs notmuch-search-mode-map "G" 'end-of-buffer)
+(evil-define-key 'emacs notmuch-search-mode-map "g" 'beginning-of-buffer)
+(evil-define-key 'emacs notmuch-search-mode-map "j" 'next-line)
+(evil-define-key 'emacs notmuch-search-mode-map "k" 'previous-line)
+(evil-define-key 'emacs notmuch-search-mode-map ":" 'evil-ex)
+(evil-define-key 'emacs notmuch-search-mode-map " " 'notmuch-jump-search)
+(evil-define-key 'emacs notmuch-search-mode-map "d" 'notmuch-delete)
+(evil-define-key 'emacs notmuch-search-mode-map "f" 'notmuch-flag)
+(evil-define-key 'emacs notmuch-search-mode-map "/" 'notmuch-search-filter)
+(evil-define-key 'emacs notmuch-search-mode-map "u" 'notmuch-poll-and-refresh-this-buffer)
+(evil-define-key 'emacs notmuch-search-mode-map "i" 'notmuch-tag-jump)
+
+
+(evil-define-key 'emacs notmuch-hello-mode-map " " 'notmuch-jump-search)
+
+
+(defun nm-bury-view ()
+  "Bury the current nevermore buffers."
+  (interactive)
+  (let ((w (get-buffer-window nm-view-buffer)))
+    (when w
+      (quit-window nil w))))
+
+(evil-define-key 'emacs nm-mode-map "q" 'nm-bury-view)
+
+
+;; update
+(defun my-mbsync () (interactive) (save-window-excursion (shell-command "mail update")))
+(defun nm-mail-update () (interactive) (my-mbsync) (nm-refresh))
+(evil-define-key 'emacs nm-mode-map "s" 'nm-mail-update)
+
+
+
+
+
+;; update
+(evil-define-key 'emacs nm-mode-map "u" 'nm-refresh)
+
+
+
+
+
+
+;; Flag
+(defun nm-flag ()
+  "Delete it."
+  (interactive)
+  (nm-apply-to-result (lambda (q)
+                        (notmuch-tag q '("+flagged" "-unread"))))
+  (nm-update-tags)
+  (forward-line))
+
+
+;; Flag
+(defun nm-mark-read ()
+  "Delete it."
+  (interactive)
+  (nm-apply-to-result (lambda (q)
+                        (notmuch-tag q '("-unread"))))
+  (nm-update-tags)
+  (forward-line))
+
+
+(evil-define-key 'emacs nm-mode-map (kbd "DEL")  'nm-mark-read)
+
+
+
+
+
+
+
+
+(evil-define-key 'emacs nm-mode-map "t"  'nm-flag)
+(evil-define-key 'emacs nm-mode-map "\\" 'nm-tag)
+
+
+(evil-define-key 'emacs nm-mode-map "j" 'next-line)
+(evil-define-key 'emacs nm-mode-map "k" 'previous-line)
+(evil-define-key 'emacs nm-mode-map "G" 'end-of-buffer)
+(evil-define-key 'emacs nm-mode-map "g" 'beginning-of-buffer)
+
+
+
+(defun nm-query (str)
+  (interactive)
+  (nm-interrupt)
+  (setq nm-query str)
+  (nm-refresh))
+
+;; (defun nm-box-flagged () (interactive) (nm-query "tag:flagged"))
+;; (defun nm-box-sent    () (interactive) (nm-query "tag:sent"))
+;; ;; (defun nm-box-urgent  () (interactive) (nm-query "tag:urgent"))
+;; (defun nm-box-myself  () (interactive) (nm-query "tag:myself"))
+;; (defun nm-box-all     () (interactive) (nm-query "*"))
+;; (defun nm-box-drafts  () (interactive) (nm-query "tag:drafts or folder:drafts"))
+
+
+;; 
+;; (evil-define-key 'emacs nm-mode-map "i" 'nm-reset)
+;; (evil-define-key 'emacs nm-mode-map " " 'nm-box-flagged)
+;; (evil-define-key 'emacs nm-mode-map "s" 'nm-box-sent)
+;; ;; (evil-define-key 'emacs nm-mode-map "u" 'nm-refresh)
+;; (evil-define-key 'emacs nm-mode-map "b" 'nm-box-myself)
+;; (evil-define-key 'emacs nm-mode-map "a" 'nm-box-all)
+;; (evil-define-key 'emacs nm-mode-map "p" 'nm-box-drafts)
+
+
+(defhydra nm-hydra-boxes (:color teal :hint nil :exit t)
+  "inboxes"
+  ("i" (nm-reset) "inbox")
+  ("u" (nm-query "tag:unread") "unread")
+  ("f" (nm-query "tag:flagged") "flagged")
+  ("s" (nm-query "tag:sent") "sent")
+  ("m" (nm-query "tag:myself") "myself")
+  ("a" (nm-query "*") "all")
+  ("d" (nm-query "tag:drafts or folder:drafts") "drafts")
+  ("w" (nm-query "tag:work") "work")
+  ("b" (nm-query "tag:bills") "bills")
+  ("x" (nm-query "tag:deleted") "deleted")
+  ("n" (nm-query "tag:newsletters") "newsletters")
+  ("z" (nm-query "tag:spam") "spam")
+  ("o" (nm-query "tag:orders") "orders")
+  ("e" (nm-query "tag:signed") "signed")
+  ("q" nil "quit")
+  ("ESC" nil "quit"))
+
+
+(evil-define-key 'emacs nm-mode-map " " 'nm-hydra-boxes/body)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;; (add-to-list 'default-frame-alist '(internal-border-width . 10))
+
+
+
+(add-hook 'message-mode-hook
+          (lambda ()
+            (font-lock-add-keywords nil
+				    '(("^[ \t]*>[ \t]*>[ \t]*>.*$"
+				       (0 'message-multiply-quoted-text-face))
+				      ("^[ \t]*>[ \t]*>.*$"
+				       (0 'message-double-quoted-text-face))))))
+
+
+(setq nm-default-query "tag:myself or not tag:sent and not tag:bills and not tag:newsletters and not tag:social and not tag:orders and not tag:drafts and not tag:spam and date:6M..now")
+
+
+
+
+
+
+
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+	      (lambda (frame)
+		(select-frame frame)
+		(when (display-graphic-p)
+		  (load-theme 'twilight-anti-bright t)
+		  (menu-bar-mode)
+		  (tool-bar-mode)))))
+;; (load-theme 'suscolors t)
+(require 'doom-themes)
+(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+
+(define-key evil-emacs-state-map (kbd "C-c C-c") 'ibuffer-list-buffers)
+
+(global-set-key [M-tab] 'neotree-toggle)
+
+
+;; RUN: all-the-icons-install-fonts
+
+;;  ;; Global settings (defaults)
+;;  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;
+;;  ;; Load the theme (doom-one, doom-molokai, etc); keep in mind that each
+;;  ;; theme may have their own settings.
+;;  (load-theme 'doom-one t)
+;;
+;;  ;; Enable flashing mode-line on errors
+;;  (doom-themes-visual-bell-config)
+;;
+;;  ;; Enable custom neotree theme
+
+(pdf-tools-install)
+(setq-default pdf-view-display-size 'fit-page)
+
+(evil-define-key  'emacs  pdf-view-mode-map "\\"        'hydra-pdftools/body)                   
+;; (evil-define-key  'emacs  pdf-view-mode-map "<spc>"     'pdf-view-scroll-down-or-next-page)     
+(evil-define-key  'emacs  pdf-view-mode-map "g"         'pdf-view-first-page)                   
+(evil-define-key  'emacs  pdf-view-mode-map "<tab>"     'neotree-toggle)                        
+(evil-define-key  'emacs  pdf-view-mode-map "G"         'pdf-view-last-page)                    
+(evil-define-key  'emacs  pdf-view-mode-map "l"         'image-forward-hscroll)                 
+(evil-define-key  'emacs  pdf-view-mode-map "h"         'image-backward-hscroll)                
+(evil-define-key  'emacs  pdf-view-mode-map "j"         'pdf-view-next-page)                    
+(evil-define-key  'emacs  pdf-view-mode-map "k"         'pdf-view-previous-page)                
+(evil-define-key  'emacs  pdf-view-mode-map "e"         'pdf-view-goto-page)                    
+(evil-define-key  'emacs  pdf-view-mode-map "u"         'pdf-view-revert-buffer)                
+(evil-define-key  'emacs  pdf-view-mode-map "al"        'pdf-annot-list-annotations)            
+(evil-define-key  'emacs  pdf-view-mode-map "ad"        'pdf-annot-delete)                      
+(evil-define-key  'emacs  pdf-view-mode-map "aa"        'pdf-annot-attachment-dired)            
+(evil-define-key  'emacs  pdf-view-mode-map "am"        'pdf-annot-add-markup-annotation)       
+(evil-define-key  'emacs  pdf-view-mode-map "at"        'pdf-annot-add-text-annotation)         
+(evil-define-key  'emacs  pdf-view-mode-map "y"         'pdf-view-kill-ring-save)               
+(evil-define-key  'emacs  pdf-view-mode-map "i"         'pdf-misc-display-metadata)             
+(evil-define-key  'emacs  pdf-view-mode-map "s"         'pdf-occur)                             
+(evil-define-key  'emacs  pdf-view-mode-map "b"         'pdf-view-set-slice-from-bounding-box)  
+(evil-define-key  'emacs  pdf-view-mode-map "r"         'pdf-view-reset-slice)                  
+(evil-define-key  'emacs  pdf-view-mode-map (kbd "C-s") 'pdf-occur)
+(evil-define-key  'emacs  pdf-view-mode-map "/"         'pdf-occur)                             
+
+(defhydra hydra-pdftools (:color blue :hint nil)
+        "
+        
+ Annotations    Search/Link       │ PDF Tools 
+──────────────────────────────────┴───────────
+ [_al_] list    [_s_] search       [_u_] revert buffer
+ [_am_] markup  [_o_] outline      [_i_] midnight
+ [_at_] text    [_F_] link         [_d_] dark mode
+ [_ad_] delete  [_f_] search link
+ [_aa_] dired
+ [_y_]  yank
+--------------------------------------------------------------
+        "
+        ("\\" hydra-master/body "back")
+        (" " hydra-master/body "back")
+        ("<ESC>" nil "quit")
+        ("al" pdf-annot-list-annotations)
+        ("ad" pdf-annot-delete)
+        ("aa" pdf-annot-attachment-dired)
+        ("am" pdf-annot-add-markup-annotation)
+        ("at" pdf-annot-add-text-annotation)
+        ("y"  pdf-view-kill-ring-save)
+        ("+" pdf-view-enlarge :color red)
+        ("-" pdf-view-shrink :color red)
+        ("0" pdf-view-scale-reset)
+        ("H" pdf-view-fit-height-to-window)
+        ("W" pdf-view-fit-width-to-window)
+        ("P" pdf-view-fit-page-to-window)
+        ("n" pdf-view-next-page-command :color red)
+        ("p" pdf-view-previous-page-command :color red)
+        ("d" pdf-view-dark-minor-mode)
+        ("b" pdf-view-set-slice-from-bounding-box)
+        ("r" pdf-view-reset-slice)
+        ("g" pdf-view-first-page)
+        ("G" pdf-view-last-page)
+        ("e" pdf-view-goto-page)
+        ("o" pdf-outline)
+        ("s" pdf-occur)
+        ("i" pdf-view-midight-minor-mode)
+        ("u" pdf-view-revert-buffer)
+        ("F" pdf-links-action-perfom)
+        ("f" pdf-links-isearch-link)
+        ("B" pdf-history-backward :color red)
+        ("N" pdf-history-forward :color red)
+        ("l" image-forward-hscroll :color red)
+        ("h" image-backward-hscroll :color red))
+
+
+(evil-define-key 'emacs pdf-view-mode-map " " 'hydra-pdftools/body)
+
+(add-hook 'pdf-tools-enabled-hook 'pdf-view-midnight-minor-mode)
+

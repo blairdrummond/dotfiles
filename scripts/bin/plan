@@ -1,0 +1,263 @@
+#!/bin/sh
+
+seen_reminders=/home/blair/desk/.seen_reminders
+
+
+b0=$(tput setab 0)
+b1=$(tput setab 1)
+b2=$(tput setab 2)
+b3=$(tput setab 3)
+b4=$(tput setab 4)
+b5=$(tput setab 5)
+b6=$(tput setab 6)
+b7=$(tput setab 7)
+
+
+c0=$(tput setaf 0)
+c1=$(tput setaf 1)
+c2=$(tput setaf 2)
+c3=$(tput setaf 3)
+c4=$(tput setaf 4)
+c5=$(tput setaf 5)
+c6=$(tput setaf 6)
+c7=$(tput setaf 7)
+c8=$(tput setaf 8)
+c9=$(tput setaf 9)
+c10=$(tput setaf 10)
+
+f0=$(tput setaf 7)
+f1=$(tput setaf 7)
+f2=$(tput setaf 7)
+
+
+
+plan_todo () {
+
+    todo l by p 
+
+}
+
+plan_vmail () {
+
+    if [ -d ~/mail/gmail/ ]; then
+
+	GREP_COLORS='mt=1;41;37' 
+	on="${c3}"
+	off="${c2}"
+
+	echo
+
+	true || notmuch show --format=json tag:flagged and     tag:urgent 2> /dev/null \
+	    | jq '.[][0][0].headers | [.Date,.From,.Subject] | @json' \
+	    | sed 's/\\"/"/g' \
+	    | sed 's/^.\(.*\).$/\1/' \
+	    | python3 -c "
+import sys
+import json
+import re
+
+email = re.compile(' <.*@.*\..*>')
+
+acc = []
+s = ''
+for line in sys.stdin:
+    if line.startswith('}'):
+        s += line
+        acc.append(s)
+        s = ''
+    else:
+        s += line
+
+
+for line in acc:
+    jline = json.loads(line)
+    print(' $c1{}\n $c3{}\n $c7{}\n\n'.format(
+        re.sub(string=jline['From'], repl='', pattern=email), jline['Date'][:17], jline['Subject'])
+    )
+" | cut -c -50
+
+	notmuch show --format=json tag:flagged and not tag:urgent 2> /dev/null \
+	    | jq '.[][0][0].headers' \
+	    | python3 -c "
+import sys
+import json
+import re
+
+email = re.compile(' <.*@.*\..*>')
+
+acc = []
+s = ''
+for line in sys.stdin:
+    if line.startswith('}'):
+        s += line
+        acc.append(s)
+        s = ''
+    else:
+        s += line
+
+
+for line in acc:
+    jline = json.loads(line)
+    print(' $c6{}\n $c2{}\n $c7{}\n\n'.format(
+        re.sub(string=jline['From'], repl='', pattern=email), jline['Date'][:17], jline['Subject'])
+    )
+" | cut -c -50
+
+
+
+
+
+	# {
+	#     echo 
+	#     printf "\t${c6}  inbox:${c7} $(notmuch count +inbox date:"1M.." -spam +unread)\n"
+	#     printf "\t${c6} urgent:${c7} $(notmuch count tag:urgent)\n"
+	#     printf "\t${c6}flagged:${c7} $(notmuch count tag:flagged)\n"
+	#     printf "\t${c6}reading:${c7} $(notmuch count tag:reading_group)\n"
+	#     echo
+	# }
+    fi
+
+}
+
+
+
+plan_email () {
+
+    if [ -d ~/mail/gmail/ ]; then
+
+	GREP_COLORS='mt=1;41;37' 
+	on="${c3}"
+	off="${c2}"
+
+	echo
+
+	{
+	    notmuch show --format=json tag:flagged 2> /dev/null | jq '.[][0][0].headers | [.Date,.From,.Subject] | @csv' | sed 's/[^"]*,\\"/ ::: /g' | sed 's/\\"//g' | sed 's/^"\(.*\)"$/\1/' | awk '{$1=$6="";$5="\t";print}' | sed "s/^\(................\)//1" | sed "s/:::.*:::/$c4&$c7/1" | sed 's/<.*@.*>//g' | awk -F ':::' '{printf "%-1s%- 23s %+ 10s\n",$1,$2,$3}' 2> /dev/null
+
+	} | cut -c -90
+
+
+	{
+	    echo 
+	    printf "\t${c4}inbox:${c7} $(notmuch count +inbox date:"1M.." -spam +unread)"
+	    printf "\t${c4}urgent:${c7} $(notmuch count tag:urgent)"
+	    printf "\t${c4}flagged:${c7} $(notmuch count tag:flagged)"
+	    printf "\t${c4}reading:${c7} $(notmuch count tag:reading_group)"
+	    echo
+	}
+    fi
+
+}
+
+plan_remind () {
+
+    if remind -naa ~/desk/remind/top.rem | grep -q "$(date +'%Y/%m/%d')"; then
+	echo " ${c6}today${c7}"
+	remind -naa ~/desk/remind/top.rem \
+            | grep "$(date +'%Y/%m/%d')" \
+            | awk '{$1=""; print}' \
+            | sed 's/today$//'
+
+	echo
+
+	[ "$(remind -naa ~/desk/remind/top.rem \
+            | grep "$(date +'%Y/%m/%d')" \
+            | check-against $seen_reminders \
+	    | wc -l)" -gt 0 ] && beep
+
+	remind -naa ~/desk/remind/top.rem \
+            | grep "$(date +'%Y/%m/%d')" \
+            | check-against $seen_reminders \
+            | tee -a $seen_reminders \
+            | awk '{$1=""; print}' \
+	    | while read line; do
+	    notify-send -t 0 "$line"
+	    # sms-notify "$line"
+	done
+	
+    fi
+
+    if remind -naa ~/desk/remind/top.rem | grep -q "$(date -d 'tomorrow' +'%Y/%m/%d')"; then
+	echo " ${c2}tomorrow${c7}"
+	remind -naa ~/desk/remind/top.rem \
+            | grep "$(date -d 'tomorrow' +'%Y/%m/%d')" \
+            | awk '{$1=""; print}' \
+            | sed 's/tomorrow$//'
+
+	echo
+    fi
+
+
+    # Doesn't work well yet
+    if remind -t3 ~/desk/remind/top.rem | grep -v tomorrow | grep -v today > /dev/null; then
+	echo " ${c1}future${c7}"
+	remind -t3 ~/desk/remind/top.rem | grep -v tomorrow | grep -v today | sed '/^\s*$/d' | sed 's/^/ /'
+    fi
+
+
+
+
+}
+
+plan_cal () {
+
+    today=$(date +%e | sed 's/ \([0-9]\)/\1 /')
+    tomorrow=$(date -d 'tomorrow' +%e | sed 's/ \([0-9]\)/\1 /')
+
+    echo '╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮'
+    echo '│  Sunday  │  Monday  │ Tuesday  │Wednesday │ Thursday │  Friday  │ Saturday │'
+
+    remind -cu+7 -vt3 -w,5, ~/desk/remind/top.rem \
+	| sed '/^\s*$/d' \
+	| sed '1,2d' \
+	| sed "0,/$today/ s/│$today *...[ \*]*│/│${c3}░▒▓▉${b3}${c0}$today${b0}${c3}▉▓▒░${c7}│/" \
+	| sed "0,/$tomorrow/ s/│$tomorrow *...[ \*]*│/│${c1}░▒▓▉${b1}${c0}$tomorrow${b0}${c1}▉▓▒░${c7}│/" \
+	| sed "1,/|1 /  s/│1 \(...\) *│/│${c2}1 « \1 » ${c7}│/" \
+	| sed "s/│\([1-9][0-9]\|[1-9] \)...[^│]*/│\1        /g" \
+	| grep -v '^$'
+}
+
+if [ "$2" = loop ]; then
+    tput civis
+    case "$1" in
+
+	todo)
+	    clear && plan todo
+	    inotifywait -m -e modify ~/desk/.todos.json 2>/dev/null |
+		while read line; do
+		    clear && plan todo
+		done
+	    ;;
+	*)
+	    
+	    while clear && plan "$1" | head -c -1 && sleep 300; do
+		:
+	    done
+	    exit 0
+	    ;;
+    esac
+
+fi
+
+case "$1" in
+
+    cal)        plan_cal ;;
+    todo)       plan_todo ;;
+    mail|email) plan_email ;;
+    vmail)      plan_vmail ;;
+    remind)     plan_remind ;;
+    *)
+	clear
+	plan_todo
+
+	echo
+	echo " ${c6}mail"
+
+	plan_email
+
+	echo
+	echo " ${c6}reminders"
+
+	plan_remind
+	;;
+esac

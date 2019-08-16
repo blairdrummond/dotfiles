@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if test -z $1; then
+    bg="$(xrdb -query | grep background | sed '1q' | awk '{print $2}')"
+else
+    bg=$1
+fi
+
+convert \( -size 256x256 xc:$bg \) ~/desk/.noise.png  -gravity center -composite -format png -quality 99 /tmp/.wallswag.png
+
+feh --bg-tile /tmp/.wallswag.png
+
+exit 0
+
+
+# old garbage below
+convert \
+    -size 1920x1080 \
+    canvas:"$bg" \( canvas:"$bg" -seed 100 +noise gaussian -channel green -separate -evaluate add 5% \) \
+    -compose dissolve -define compose:args="10" -composite \
+    -modulate 110,100,110 \
+    -blur 01 \
+    /tmp/wall.png
+
+feh --bg-fill /tmp/wall.png

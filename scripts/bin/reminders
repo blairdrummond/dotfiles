@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+exit 0
+
+{
+org-get today    | sed 's/^/ /' | paste -sd ',' -
+org-get tomorrow | sed 's/^/ /' | paste -sd ',' -
+} | sed 's/$/ /' | paste -sd ":"
+
+
+
+
+# red=$(xrdb -query  | grep color1  | sed 1q | awk '{print $2}')
+# grn=$(xrdb -query  | grep color2  | sed 1q | awk '{print $2}')
+# ylw=$(xrdb -query  | grep color3  | sed 1q | awk '{print $2}')
+
+left=$(remind -naa ~/desk/remind/top.rem \
+       | grep "$(date +'%Y/%m/%d')" \
+       | awk '{$1=""; print}' \
+       | sort \
+       | sed 's/ today$//' \
+       | paste -sd "," -)
+
+right=$(remind -naa ~/desk/remind/top.rem \
+	| grep "$(date -d 'tomorrow' +'%Y/%m/%d')" \
+	| awk '{$1=""; print}' \
+	| sort \
+	| sed 's/ tomorrow$//' \
+	| paste -sd "," -)
+
+if test -n "$left" && test -n "$right"; then
+
+    echo " $left ¦ $right"
+
+elif test -n "$left"; then
+
+    echo " today: $left"
+
+elif test -n "$right"; then
+
+    echo " tomorrow: $right"
+
+else
+
+    echo ""
+
+fi

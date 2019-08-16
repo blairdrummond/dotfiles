@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Make sure this exists
+if [ ! -S /tmp/emacs1000/gui ]; then
+    emacs --daemon=gui > /dev/null 2>&1
+    emacsclient -s '/tmp/emacs1000/gui' # -e "(load-theme 'twilight-anti-bright)"
+fi
+
+emacsclient -c -s '/tmp/emacs1000/gui' "$@" > /dev/null &

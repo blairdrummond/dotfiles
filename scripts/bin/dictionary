@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if test -z $1; then
+    # sel=$(awk '{print $1}' /usr/share/dictd/wikt-en-en-2014-09-14.index | uniq | dmenu -i -p 'def:')
+    sel=$(awk '{print $1}' /usr/share/dict/words | uniq | dmenu -i -p 'def:')
+    # sel=$(aspell dump master | sort | dmenu -p 'def:')
+    test -z "$sel" && exit 0
+    st -t dmenu_dictionary -e dictionary "$sel"
+else
+    sel=$1
+    test -z "$sel" && exit 0
+    dict "$sel" | less
+fi

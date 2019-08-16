@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xclock -digital -strftime "%a, %b %e, %H:%M"  -face "gohufont-11"

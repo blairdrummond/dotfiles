@@ -1,0 +1,40 @@
+#!/bin/zsh
+
+[ -f index.markdown ] || [ -f index.html ] || exit 1
+
+# Verify correct branch
+git checkout develop
+
+git add -u
+git add posts/
+git commit
+git push
+
+# Temporarily store uncommited changes
+# git stash
+
+# Build new files
+stack build
+stack exec site clean
+stack exec site build
+
+echo "Checking links ... "
+stack exec site check | grep ERROR && exit 0
+
+# Get previous files
+git fetch --all
+git checkout master
+
+# Overwrite existing files with new files
+cp -a _site/. .
+
+# Commit
+git add -A
+git commit -m "Publish."
+
+# Push
+git push origin master:master
+
+# Restoration
+git checkout develop
+# git stash pop

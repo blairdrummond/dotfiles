@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ "$1" = gui ]; then
+        emacsclient -s '/tmp/emacs1000/gui' -e '(with-temp-message "" (mapconcat (quote (lambda (e) (format "%s" (princ e)))) (buffer-list) "\n"))' \
+		| xargs echo -e \
+                | sed 's/\(^ *\| *$\)//' \
+                | grep -v "^\*.*\*$"
+else
+        emacsclient -e '(with-temp-message "" (mapconcat (quote (lambda (e) (format "%s" (princ e)))) (buffer-list) "\n"))' \
+        emacsclient -e '(mapconcat (quote (lambda (e) (format "%s\n" (princ e)))) (buffer-list) "\n")' \
+		| xargs echo -e \
+                | sed 's/\(^ *\| *$\)//' \
+                | grep -v "^\*.*\*$"
+
+        echo '*scratch*'
+
+fi

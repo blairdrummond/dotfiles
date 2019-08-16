@@ -1,0 +1,7 @@
+#!/bin/sh
+
+color="$(convert "$1" -negate -modulate 200% -crop 100x20 -resize 1x1 text:- | sed -n 2p | awk '{print $3}')"
+
+feh --bg-fill "$1"
+
+FvwmCommand "Colorset 4 RootTransparent buffer, fg   \"$color\",    bg \"$color\", hi black, tint black 0"

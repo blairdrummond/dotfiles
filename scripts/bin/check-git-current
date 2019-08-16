@@ -1,0 +1,28 @@
+#!/bin/bash
+
+cd ~/desk/.src
+
+check () {
+
+	git fetch > /dev/null 2>&1
+	
+	UPSTREAM="@{u}"
+	LOCAL=$(git rev-parse @)
+	REMOTE=$(git rev-parse "$UPSTREAM")
+	BASE=$(git merge-base @ "$UPSTREAM")
+
+	if [ $LOCAL = $REMOTE ]; then
+		echo "Up-to-date"
+	elif [ $LOCAL = $BASE ]; then
+		echo "Need to pull"
+	elif [ $REMOTE = $BASE ]; then
+		echo "Need to push"
+	else
+		echo "Diverged"
+	fi
+
+}
+
+for d in *; do
+	([ -d $d ] && cd $d && [ -d .git/ ] && echo -n "$d - " && check && cd ~/desk/.src)
+done

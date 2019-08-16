@@ -1,0 +1,40 @@
+#!/bin/bash
+
+list () {
+
+    echo "screen-9
+screen-11
+envypn-12
+peep-8
+peep-10
+peep-12
+gohufont-9
+gohufont-11
+gohufont:style=bold:size=11
+gohufont-14
+gohufont:style=bold:size=14
+tewi-9
+dina-10
+kakwafont-10
+terminus-9
+terminus-10
+terminus-12
+terminus:style=bold:size=12
+terminus-14
+terminus:style=bold:size=14
+terminus-16
+terminus:style=bold:size=16
+inconsolata-11
+inconsolata-12
+inconsolata-13
+inconsolata-16"
+
+}
+
+sel=$(list | dmenu -p font)
+
+test -n "$sel" || exit 0
+
+echo $sel
+xrdb -merge <(echo "st.font: $sel")
+pkill -USR1 -x st

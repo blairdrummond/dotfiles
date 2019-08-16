@@ -1,0 +1,35 @@
+#!/bin/bash
+
+while test $# -gt 0; do
+    case "$1" in
+        -user)
+            shift
+            user=$1
+            shift
+            ;;
+        -pass|-password)
+            shift
+            pass=$1
+            shift
+            ;;
+        *)
+	    link=$1
+            ;;
+    esac
+done  
+
+if test -n "$user$password"; then
+    # mkdir "$link" && cd "$link"
+
+    lynx -dump -listonly -auth="${user}:${pass}" "$link" | awk '{print $2}' | grep "pdf$" |
+	while read line; do
+	    wget --http-user="$user" --http-password="$pass" "$line"
+	done
+else
+    # mkdir "$link" && cd "$link"
+
+    lynx -dump -listonly "$link" | awk '{print $2}' | grep "pdf$" |
+	while read line; do
+	    wget "$line"
+	done
+fi

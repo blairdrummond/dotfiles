@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "$@" | mail -s "reminder" 2267505508@txt.bell.ca

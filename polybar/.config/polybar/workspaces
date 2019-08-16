@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+red=$(xrdb -query  | grep color1  | sed 1q | awk '{print $2}')
+blu=$(xrdb -query  | grep color4  | sed 1q | awk '{print $2}')
+ylw=$(xrdb -query  | grep color3  | sed 1q | awk '{print $2}')
+mag=$(xrdb -query  | grep color5  | sed 1q | awk '{print $2}')
+wht=$(xrdb -query  | grep color7  | sed 1q | awk '{print $2}')
+blk=$(xrdb -query  | grep color0  | sed 1q | awk '{print $2}')
+
+sub () {
+
+    case "$1" in
+	1)  echo "" ;;
+	2)  echo "" ;;
+	3)  echo "" ;;
+	4)  echo "" ;;
+	5)  echo "" ;;
+	6)  echo "" ;;
+	7)  echo ""  ;;
+	8)  echo ""  ;;
+	9)  echo ""  ;;
+	10) echo ""  ;;
+
+	*) echo "$1" ;;
+    esac
+    
+}
+
+
+{
+    echo go
+    herbstclient --idle | grep --line-buffered "\(tag_changed\|tag_flags\)"
+} |
+    while read line; do
+	{
+	    IFS=$'\t' read -ra tags <<< "$(herbstclient tag_status)"
+	    j=0
+	    echo "%{c}"
+            for i in "${tags[@]}" ; do
+		[[ ! $j -eq 0 ]] && [[ $((j % 10)) -eq 0 ]] && echo "%{F$blu}      %{F-}"
+		case ${i:0:1} in
+                    '#') echo "%{B$blk} %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:}  %{F$red}$(sub $((${i:1}+1)))  %{A}%{A} %{B-}" ;;
+                    '+') echo "%{B$blk} %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:}  %{F$mag}$(sub $((${i:1}+1)))  %{A}%{A} %{B-}" ;;
+		    ':') echo "%{B$blk} %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:}  %{F$wht}$(sub $((${i:1}+1)))  %{A}%{A} %{B-}" ;;
+                    '-') echo "%{B$blk} %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:}  %{F$red}$(sub $((${i:1}+1)))  %{A}%{A} %{B-}" ;;
+		    '!') echo "%{B$blk} %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:}  %{F$red}$(sub $((${i:1}+1)))  %{A}%{A} %{B-}" ;;
+		    *)   echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:}  %{F$ylw}$(sub $((${i:1}+1)))  %{A}%{A} " ;;
+		esac
+		((j++))
+            done
+	} | paste -sd "" -
+    done

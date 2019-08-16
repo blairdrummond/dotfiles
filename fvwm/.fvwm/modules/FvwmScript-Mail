@@ -1,0 +1,33 @@
+WindowTitle {Mail}
+WindowSize  800 18
+
+Font "xft:Tewi:size=8"
+
+Init
+ Begin
+  Set $Status = (GetOutput {exec mail-status} 1 -1)
+  ChangeTitle 1 $Status
+End
+
+PeriodicTasks
+ Begin 
+  If (RemainderOfDiv (GetTime) 30)==0 Then
+  Begin
+   Set $Status = (GetOutput {exec mail-status} 1 -1)
+   ChangeTitle 1 $Status
+  End
+End
+
+Widget 1
+Property
+ Position 0 0
+ Size 800 18
+ Type ItemDraw
+ Flags NoReliefString Left
+ Title {}
+Main
+ Case message of
+  SingleClic :
+  Begin
+  End
+End

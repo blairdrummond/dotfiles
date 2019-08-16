@@ -1,0 +1,3 @@
+#!/bin/sh
+
+(emacsclient -c -s /tmp/emacs1000/gui $@) > /dev/null 2>&1 &

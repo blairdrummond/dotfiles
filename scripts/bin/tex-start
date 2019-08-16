@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mkdir TeX_it_up
+cp -r ~/desk/.tex-files/* TeX_it_up/

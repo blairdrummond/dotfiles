@@ -1,0 +1,68 @@
+# mpd
+mpd_host="localhost"
+mpd_port="6600"
+mpd_music_dir="/mnt/media/music"
+
+# lyrics_directory="~/log/lyrics"
+
+cyclic_scrolling = no
+playlist_disable_highlight_delay = "1"
+header_visibility = no
+statusbar_visibility = no
+# playlist_display_mode = columns 
+playlist_display_mode = classic
+mouse_support = yes
+titles_visibility = no
+
+# formats
+# song_columns_list_format = "(41)[green]{t|f}(41)[cyan]{b} (20)[yellow]{ar}"
+
+# song_list_format = "{$5{%t}|{%f}$R{$3%b}}|{%f $3$r}"
+# song_list_format = "{{$3%a}  -  $5{%t}|{%f}}{$R{%l}}"
+# song_list_format = "$5{%t}|{%f}}{$R{{$3%D}}}"
+# song_list_format = "$5{%t}|{%f}{$R{{$3%b $6  $4%a}}}"
+# song_list_format = "$5{%t}|{%f}$R$6{%D}"
+# song_list_format = "$2{%b}|{%D}$6$R$5{%t}|{%f}"
+# song_list_format = "$2{%b}|{%D}$6  -  $5{%t}|{%f}$R "
+# song_list_format = "$2{%b}|{%D}$6  -  $5{%t}|{%f}$R {$7%a}$5 - $7%y"
+# song_list_format = "$2{%b}|{%D}     $5{%t}|{%f}$R {$7%a} $7{%y}|{    }"
+# song_list_format = "$6{%a - %b}|{%D}$R$5{%t}|{%f}$R"
+# song_list_format = "{$5%15a$6/$5%17b}|{$5%33D} $3~ $2{%40t}|{%40f}                                                                                                       "
+song_list_format = "$2{%40t}|{%40f}    $R    {$5%25a$3/$5%27b}|{$5%53D}"
+
+# song_columns_list_format = (1f)[red]{} (40)[red]{t|f} (25)[yellow]{a} (25)[green]{b} (10)[blue]{y} (4f)[white]{l} (1f)[white]{}
+song_columns_list_format = (1f)[red]{} (40)[red]{t|f} (25)[yellow]{a} (25)[green]{b}
+# song_columns_list_format = (1f)[red]{} (80)[red]{t|f} (30)[yellow]{a-b|D}
+
+statusbar_color = green
+song_status_format = "{{{$2%t}$3 × %b} × $2%a$3}|{%f}"
+alternative_header_second_line_format = "$3%a"
+media_library_primary_tag = artist
+
+
+# selected_item_prefix = "$5"
+# selected_item_suffix = "$9"
+
+now_playing_prefix = "$4»$9 "
+# now_playing_suffix = "                                 «"
+
+# progress bar
+progressbar_look = "─ ─"
+# progressbar_look = "━━━"
+# progressbar_look = "───"
+# progressbar_look = "=="
+# progressbar_boldness = no
+progressbar_color = black
+progressbar_elapsed_color = green
+
+# colors
+colors_enabled = yes
+
+# visualizer
+visualizer_in_stereo = no
+visualizer_sync_interval = 30
+visualizer_output_name = "Pipe"
+visualizer_fifo_path = "/tmp/mpd.fifo"
+# visualizer_type = "spectrum"
+visualizer_color = "red"
+# visualizer_look = "þ┃"

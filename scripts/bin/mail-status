@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [ -d ~/mail/gmail ]; then
+{
+    # if ! pass email > /dev/null ; then
+        #     echo " $(icon ) signed out "
+    # else
+
+        mail=$(notmuch count tag:inbox and tag:unread)
+        case $mail in
+	0)
+            ;;
+
+	*)
+                # echo "  $mail unread "
+                echo " $mail unread"
+                ;;
+        esac
+
+    # fi
+
+
+    count="$(notmuch count tag:flagged and tag:urgent)"
+    if [ ! $count -eq 0 ]; then
+    	# echo "  $count urgent "
+    	echo " $count urgent"
+    fi
+
+
+    count=$(ls ~/mail/msmtpqueue/ | grep ".mail$" | wc -l)
+    if [ ! $count -eq 0 ]; then
+	# echo "  $count enqueued "
+	echo " $count enqueued"
+    fi
+    
+} | paste -sd "," -
+fi

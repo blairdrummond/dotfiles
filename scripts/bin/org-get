@@ -1,0 +1,36 @@
+#!/bin/sh
+
+exit 0
+
+while test -n "$1"; do
+
+	case $1 in
+		"")
+			exit 1
+			;;
+
+		[tT]oday)
+			n=0
+			;;
+		
+		[tT]omorrow)
+			n=1
+			;;
+
+		[0-9]*)
+			n=$1
+			;;
+
+		*)
+			exit 1
+			;;
+	esac
+
+	s=$(emacsclient -s '/tmp/emacs1000/gui' --eval "(string-join (upcoming-tasks $n) \"\n\")")
+	
+	python -c "print $s"
+
+	shift
+	test -z "$1" || echo
+
+done

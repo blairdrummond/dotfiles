@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mpc > /dev/null 2>&1 || mpd
+
+if [ $TERM = screen ]; then
+    tmux rename-window ncmpcpp
+fi
+
+/usr/bin/ncmpcpp
+

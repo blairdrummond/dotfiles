@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# A script for recovering a windows recycle bin $RECYCLE.BIN
+
+if [ ! $(basename $(pwd)) = \$RECYCLE.BIN ]; then
+    echo "Must be run within \$RECYCLE.BIN folder"
+    exit 1
+fi
+
+
+strings -el -f \$I* | while read line; do
+	folderhash="\$R$(echo $line | awk -F ':' '{print $1}' | cut -c3-)"
+	foldername="$(echo $line | awk -F ':' '{print $3}' | cut -c1-)"
+	
+	if [ -d "$folderhash" ]; then
+		echo "$folderhash -> $foldername"
+		cp -rv "$folderhash" "$foldername"
+	else
+		echo "$folderhash not found. Skipping..."
+	fi
+	echo
+done

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# low battery in %
+LOW_BATTERY="25"
+# critical battery in % (execute action)
+CRITICAL_BATTERY="10"
+# action
+ACTION="sudo zzz"
+# path to battery /sys
+BATTERY_PATH="/sys/class/power_supply/BAT1/"
+
+while sleep 60; do
+    if [ -e "$BATTERY_PATH" ]; then
+        BATTERY_ON=$(cat $BATTERY_PATH/status)
+    
+        if [ "$BATTERY_ON" = "Discharging" ]; then
+            CURRENT_BATTERY=$(cat $BATTERY_PATH/capacity)
+    
+            if [ "$CURRENT_BATTERY" -lt "$CRITICAL_BATTERY" ]; then
+                notify-send "Battery is critical - Zzz..."
+				sleep 5
+                block
+    
+            elif [ "$CURRENT_BATTERY" -lt "$LOW_BATTERY" ]; then
+                notify-send "Battery is low - ${CURRENT_BATTERY}%"
+            fi
+        fi
+    fi
+done

@@ -1,0 +1,45 @@
+#!/bin/sh
+
+printf %s "$1" | xsel -i -b
+firefox "$1" > /dev/null 2>&1 &
+exit 0
+
+case $(echo "audio
+youtube
+qute
+firefox
+news
+clipboard" | dmenu) in
+    audio)
+        if [ "$TERM" = "screen" ]; then
+            you-get "$1" 
+        else
+            st -e you-get "$1" > /dev/null 2>&1 &
+        fi
+        ;;
+
+    firefox)
+        firefox "$1" > /dev/null 2>&1 &
+        ;;
+    
+    qute)
+        qutebrowser "$1" > /dev/null 2>&1 &
+        ;;
+
+    youtube)
+        if [ "$TERM" = "screen" ]; then
+            youtube-dl "$1"
+        else
+            st -e youtube-dl "$1" > /dev/null 2>&1 &
+        fi
+        ;;
+
+    clipboard)
+        printf %s "$1" | xsel -i -b
+        ;;
+
+    news)
+        link=$(news.py "$1")
+	surf "$link" > /dev/null 2>&1 &
+        ;;
+esac

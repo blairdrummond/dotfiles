@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if test -n "$1"; then
+    col_a=$(xrdb -query | grep "\*color5" | sed '1q' | awk '{print $2}')
+    col_b=$(xrdb -query | grep "\*color6" | sed '1q' | awk '{print $2}')
+    hsetroot -add "$col_a" -add "$col_b" -gradient 60
+else
+    theme=$(sed '1q' ~/.Xresources | sed 's~.*.colors/\([^>]*\)>~\1~')
+    feh --bg-fill ~/desk/.wallpapers/$theme.jpg
+fi
+ 

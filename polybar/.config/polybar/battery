@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# red=$(xrdb -query  | grep color1  | sed 1q | awk '{print $2}')
+# grn=$(xrdb -query  | grep color2  | sed 1q | awk '{print $2}')
+# ylw=$(xrdb -query  | grep color3  | sed 1q | awk '{print $2}')
+
+battery_status=$(cat /sys/class/power_supply/BAT1/status)
+battery_percent=$(cat /sys/class/power_supply/BAT1/capacity)
+case "$battery_status" in
+    Charging)
+        if [ "$battery_percent" -gt 80 ]
+        then
+            echo "%{F$grn} ${battery_percent}"
+        elif [ "$battery_percent" -gt 30 ]
+        then
+            echo "%{F$ylw} ${battery_percent}"
+        else
+            echo "%{F$red} ${battery_percent}"
+        fi
+        ;;
+    Discharging)
+        if [ "$battery_percent" -gt 80 ]
+        then
+            echo "%{F$grn} ${battery_percent}"
+        elif [ "$battery_percent" -gt 30 ]
+        then
+            echo "%{F$ylw} ${battery_percent}"
+        else
+            echo "%{F$red} ${battery_percent}"
+        fi
+        ;;
+    Unknown|Full)
+	echo "%{F$grn} 100" ;;
+esac

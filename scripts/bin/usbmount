@@ -1,0 +1,10 @@
+#!/bin/sh
+
+tomount=$(ls /dev/ | grep "sd[b-z]" | slmenu)
+
+test -n "$tomount" || exit 0
+
+sudo mount "/dev/$tomount" /mnt/hdd/
+sudo ranger --cmd "set viewmode multipane"  ~/ /mnt/hdd/
+sudo umount /mnt/hdd/
+

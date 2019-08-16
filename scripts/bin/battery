@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if acpi --battery | grep -q Charging; then
+    echo "+$(acpi --battery | cut -d "," -f 2 | sed 's/[ %]//g')"
+else
+    echo "-$(acpi --battery | cut -d "," -f 2 | sed 's/[ %]//g')"
+fi

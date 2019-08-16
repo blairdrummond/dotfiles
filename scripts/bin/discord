@@ -1,0 +1,3 @@
+#!/bin/sh
+
+chromium --kiosk "https://discordapp.com/channels/435608311749017610/435608311749017612"

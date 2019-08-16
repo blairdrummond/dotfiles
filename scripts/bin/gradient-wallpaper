@@ -1,0 +1,8 @@
+#!/bin/sh
+
+col_0=$(xrdb -query | grep "\*color0"  | sed '1q' | awk '{print $2}')
+col_a=$(xrdb -query | grep "\*color6"  | sed '1q' | awk '{print $2}')
+
+convert -size 4x4  gradient:"$col_a"-"$col_0" -distort SRT 60 -resize 1920x1080\!  /tmp/.gradient.png
+
+feh --bg-fill /tmp/.gradient.png

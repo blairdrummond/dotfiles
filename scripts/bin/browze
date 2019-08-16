@@ -1,0 +1,11 @@
+#!/bin/sh
+
+search=$(sr -elvi | tail -n +2 | cut -s -f1 | dmenu | sed 's/^google/duckduckgo/')
+
+test -z "$search" && exit 0
+result=$(sr -p $search)
+
+st -e w3m_no_images $result
+
+# sr -browser=qutebrowser $search
+# surf-open.sh "$search"

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+rssfile=/home/blair/desk/.rssfeed
+
+# You can also use rofi instead of dmenu
+sel=$(awk '{$1=""; print}' $rssfile | tac | dmenu -i -p "Item:")
+
+if test -n "$sel" && grep -iq "$sel" $rssfile; then
+    grep -i "$sel" $rssfile | awk '{print $1}' | xsel -i -b
+    grep -i "$sel" $rssfile | awk '{print $1}'
+fi
+

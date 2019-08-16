@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# urlscan -n | dmenu | xsel -i -b
+
+# link="$(urlscan -n | dmenu)"
+
+link="$(paste -sd "" - | egrep -o 'https?://[^ <>"]+' | dmenu)"
+test -n "$link" && handle-link "$link"

@@ -1,0 +1,6 @@
+UUID=913be199-2fda-42ca-9c5e-8a7806ee65ba / ext4 defaults 0 1
+UUID=f9f1a5dd-595d-4215-9ea0-902f5fd0071d none swap sw 0 0
+UUID=CA49-68B3 /boot/efi vfat defaults 0 2
+UUID=c6ee50cf-612f-4e1d-a3f7-7acd9be2b90c /home ext4 defaults 0 2
+UUID=6cd49061-e7ba-4d97-82ba-97f33095af0e /media ext4 defaults 0 0
+tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0

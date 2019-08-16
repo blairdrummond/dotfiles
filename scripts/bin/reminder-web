@@ -1,0 +1,3 @@
+#!/bin/sh
+
+remind -p2 -m /home/blair/desk/remind/top.rem | /home/blair/scripts/remind/rem2html > /tmp/remind.html

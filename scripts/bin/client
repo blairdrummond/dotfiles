@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# vim "$@"
+# emacs -nw "$@"
+# exit 0
+
+if [ $TERM = screen ]; then
+    tmux rename-window emacs
+    TERM=rxvt-unicode-256color
+fi
+
+TERM=$TERM emacsclient -t "$@" || (daemon && TERM=$TERM emacsclient -t "$@")

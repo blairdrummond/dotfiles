@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if ifconfig tun0 > /dev/null 2>&1; then
+    vpn='vpn'
+else
+    wifi=$(nmcli radio wifi)
+    if [ $wifi = enabled ]; then
+	vpn=''
+    fi
+fi
+
+
+network_id=$(/sbin/iwgetid -r)
+if [ -n "$network_id" ]
+then
+    echo "$vpn ${network_id}"
+else
+    echo "$vpn offline"
+fi
+

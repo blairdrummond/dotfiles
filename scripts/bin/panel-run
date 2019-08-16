@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+# exit 0
+
+PANEL_FIFO=/tmp/.panel_fifo
+
+# Already running.
+if [ -p $PANEL_FIFO ]; then
+    {
+	echo $'email\t'
+	echo $'battery\t'
+	echo $'tags\t'
+	echo $'network\t'
+	echo $'vpn\t'
+    } > "$PANEL_FIFO" &
+else
+    (panel-backend &)
+fi
+
+monitor=${1:-0}
+
+# theme=$(chtheme current)
+# [ -f ~/.themes/colorschemes/$theme.sh ] && . ~/.themes/colorschemes/$theme.sh
+bg=$(xrdb -query | grep "\*background"  | sed '1q' | awk '{print $2}')
+fg=$(xrdb -query | grep "\*foreground"  | sed '1q' | awk '{print $2}')
+red=$(xrdb -query | grep "\*color1"  | sed '1q' | awk '{print $2}')
+blu=$(xrdb -query | grep "\*color6"  | sed '1q' | awk '{print $2}')
+ylw=$(xrdb -query | grep "\*color2"  | sed '1q' | awk '{print $2}')
+
+hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+
+hc pad 0 20
+# hc pad 1 20 || true
+
+while IFS='' read -r line; do
+    # find out event origin
+    case $line in
+        tag*)
+            #echo "resetting tags" >&2
+	    fresh_tags=$(panel-command get_tags)
+            ;;
+        vpn*|network*)
+            #echo "resetting date" >&2
+            network="$(panel-command get_network)"
+            ;;
+        date*)
+            #echo "resetting date" >&2
+            date="$(panel-command get_clock)"
+            ;;
+	#player*)
+	#    tune="$(panel-command get_song)"
+	#    ;;
+
+	reminders)
+	    reminders="$(panel-command get_reminders)"
+	    ;;
+        quit_panel*)
+            break
+            ;;
+        focus_changed*|window_title_changed*)
+            windowtitle=$(echo $line | awk '{$1=$2="";print}' | sed 's/ - "void"$//' | sed 's/[0-9][0-9]*:[0-9][0-9]*://')
+            ;;
+        battery*)
+	    battery=$(panel-command get_battery)
+            ;;
+
+        email*)
+            mail_info="$(panel-command check_email)"
+	    if test -n "$mail_info"; then
+		email="%{F$blu}{%{F-}$mail_info%{F$blu}}%{F-}"
+	    else
+		email=""
+	    fi
+            ;;
+
+    esac
+
+    echo "%{l} $fresh_tags %{F$blu}|%{F-}$windowtitle  %{c}$email   %{r}$network   $battery   $date   "
+    # echo "%{l} $windowtitle  %{c}$(panel-command get_reminders)  %{r}$email   $network   $battery   $date   "
+
+done < "$PANEL_FIFO" | lemonbar -g "1920x20+$offset" -f 'tewi:size=8' -f 'Siji:size=8' -B "$bg" -F "$fg" -n 'bar' LVDS-1

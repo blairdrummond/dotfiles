@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd /home/blair/desk/.quotes/
+
+line=$(grep -Hv "\(^#\|^$\)" * | shuf -n 1)
+author=$(echo "$line" | awk -F ':' '{print $1}')
+
+echo "$line" | sed 's/^[^:]*://' | fold -s -w 80
+echo
+echo "			— $author"

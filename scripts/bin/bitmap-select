@@ -1,0 +1,25 @@
+#!/bin/sh
+
+folder="$HOME/desk/.bitmaps"
+
+list () {
+    echo invert
+    ls $folder | grep -v "^invert_"
+}
+
+blu=$(xrdb -query  | grep color4 | sed 1q | awk '{print $2}')
+bg=$(xrdb -query  | grep background | sed 1q | awk '{print $2}')
+
+if test -z "$1"; then
+    sel=$(ls $folder | rofi -dmenu -p "bitmap")
+    test -n "$sel" || exit 0
+    xsetroot -bitmap "$folder/$sel" -bg $bg -fg $blu
+else
+    sel=$(ls $folder | grep "^$1" | sed '1q')
+    if test -n "$sel"; then
+	xsetroot -bitmap "$folder/$sel" -bg $bg -fg $blu
+    else
+	xsetroot -bg $bg -fg $blu
+    fi
+fi
+

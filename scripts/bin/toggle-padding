@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case `herbstclient list_padding` in
+	"0 0 0 0")
+		herbstclient pad 0 20 0 0 0
+		;;
+	*)
+		herbstclient pad 0 0 0 0 0
+		;;
+esac

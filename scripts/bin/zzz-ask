@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo 'Going to sleep in 10'
+echo 'Press any key to interupt'
+
+read -t 10 || zzz-lock

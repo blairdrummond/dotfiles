@@ -1,0 +1,668 @@
+#!/bin/bash
+
+# directories
+THEME_DIR=/home/blair/.themes
+colors_dir=$THEME_DIR/colorschemes
+walls_dir=$THEME_DIR/wallpapers
+bitmaps_dir=$THEME_DIR/bitmaps
+save_theme=$THEME_DIR/colortheme
+save_bitmap=$THEME_DIR/bitmap
+save_font=$THEME_DIR/font
+save_panel=$THEME_DIR/panel
+save_paneltype=$THEME_DIR/paneltype
+no_wallpaper=$THEME_DIR/no_wallpaper
+
+default=designr
+
+get_theme () {
+    if [ -f $save_theme ]; then
+        theme=$(cat $save_theme)
+        if [ ! -f $colors_dir/$theme.sh ]; then
+            theme=$default
+            echo $theme > $save_theme
+        fi
+    else
+        theme=$default
+        echo $theme > $save_theme
+    fi
+}
+
+get_new_theme () {
+    theme=$({ echo random; ls $colors_dir; } | sed 's/\.sh$//g' | 9menu)
+    if [[ $theme == random ]]; then
+        theme="$(ls $colors_dir | shuf -n 1 | sed 's/\.sh//')"
+    fi
+    test -z "$theme" && exit 0 
+}
+
+load_theme () {
+
+    if [[ $theme == random ]]; then
+	theme="$(ls $colors_dir | shuf -n 1 | sed 's/.sh$//g')"
+    fi
+
+    if [ ! -f $colors_dir/$theme.sh ]; then
+        echo NO THEME 
+        exit 1
+    fi
+    . $colors_dir/$theme.sh
+}
+
+
+wallpaper () {
+    if [ ! -f $no_wallpaper ] && [ -f $walls_dir/$theme.jpg ]; then
+        # ps aux | awk '{print $11}' | grep -q '^compton$' || compton &
+        feh --bg-fill $walls_dir/$theme.jpg
+	# gen-wall "$bg"
+    else
+        # ps aux | awk '{print $11}' | grep -q '^compton$' && killall compton
+        bitmap
+    fi
+}
+
+bitmap () {
+    # load a specific bitmap
+    if test -n "$1"; then
+        tile=$1
+    elif [ -f $save_bitmap ]; then
+        tile=$(cat $save_bitmap)
+    #else
+    #    tile=random
+    fi
+
+    # if [ $tile = random.xbm ]; then
+    #     tile="$(ls $bitmaps_dir | shuf -n 1)"
+    # fi
+
+    if [ -f $THEME_DIR/invert ]; then
+        tile="invert_$tile"
+    fi
+
+    if [ ! -f $bitmaps_dir/$tile ]; then
+        tile=$tile
+    else    
+        tile="$bitmaps_dir/$tile"
+    fi
+
+    # xsetroot -bitmap $tile -bg $bg -fg $blk
+    # xsetroot -bitmap $tile -bg $blk -fg $bblk
+    # xsetroot -bitmap $tile -bg $bblk -fg $blk
+    xsetroot -bitmap $tile -bg $bg -fg $color4
+
+}
+
+select_bitmap () {
+    bm=$((echo random; ls $bitmaps_dir | grep -v invert | sed 's/\.xbm//') | 9menu | sed 's/\(.*\)\.xbm$/\1/g')
+
+    if [[ $bm == random ]]; then
+        bm="$(ls $bitmaps_dir | shuf -n 1 | sed 's/\.xbm//')"
+    fi
+    test -z $bm && exit 0
+}
+    
+recolor () {
+
+    xrdb ~/.Xresources
+    get_font
+    test -n "$fn" && xrdb -merge <(echo "st.font: $fn
+st.bold_font: $fn
+URxvt.font: xft:$fn
+URxvt.boldFont: xft:$fn")
+
+    xrdb -merge <(echo "
+
+cursor: $fg
+border: $bg
+mouse_background: $blu
+mouse_foreground: $fg
+highlight: $grn
+
+mupdf.shadecolor:      $bblk
+mupdf.papercolor:      $blk
+mupdf.tintcolor:       $cyn
+
+ninemenu.normbgcolor:  $blk
+ninemenu.normfgcolor:  $blu
+
+! dmenu + tabbed
+dmenu.normbgcolor: $blk
+dmenu.normfgcolor: $blu
+dmenu.selbgcolor: $blu
+dmenu.selfgcolor: $blk
+dmenu.urgfgcolor: $blk
+dmenu.urgbgcolor: $red
+
+rofi.color-window:    $bg,   $fg
+rofi.color-normal:    $bg,   $fg,   $bg,   $fg,   $bg
+rofi.color-urgent:    $bg,   $fg,   $bg,   $fg,   $bg
+rofi.color-active:    $bg,   $fg,   $bg,   $fg,   $bg
+
+st.cursorColor:  $blu
+
+URxvt.background:  $bg
+URxvt.foreground:  $fg
+
+st.background:  $bg
+st.foreground:  $fg
+*.color0:      $blk
+*.color8:      $bblk
+*.color1:      $red
+*.color9:      $bred
+*.color2:      $grn
+*.color10:     $bgrn
+*.color3:      $ylw
+*.color11:     $bylw
+*.color4:      $blu
+*.color12:     $bblu
+*.color5:      $mag
+*.color13:     $bmag
+*.color6:      $cyn
+*.color14:     $bcyn
+*.color7:      $wht
+*.color15:     $bwht
+
+")
+
+    pkill -USR1 -x st
+    pkill -SIGHUP -x 2bwm
+
+
+    for term in $(ls /dev/pts/ | grep "[0-9][0-9]*"); do
+        echo "`chtheme refresh-terminal $1`" > /dev/pts/$term
+    done
+
+    tmux set-option -g status on && tmux set-option -g status off
+
+    if ps aux | awk '{print $11}' | grep -q "^herbstluftwm$"; then
+        herbstclient attr theme.normal.inner_color   "#282828"
+        herbstclient attr theme.active.inner_color   "#282828"
+        herbstclient attr theme.urgent.inner_color   "#282828"
+
+        herbstclient attr theme.floating.normal.color   "$bblk"
+        herbstclient attr theme.floating.active.color   "$red"
+        herbstclient attr theme.floating.urgent.color   "#905656"
+
+        herbstclient attr theme.tiling.normal.color   "$blu"
+        herbstclient attr theme.tiling.active.color   "$red"
+        herbstclient attr theme.tiling.urgent.color   "#905656"
+
+        herbstclient attr theme.normal.outer_color   "#282828"
+        herbstclient attr theme.active.outer_color   "#282828"
+        herbstclient attr theme.urgent.outer_color   "#282828"
+        
+        herbstclient set  frame_border_normal_color  "$blk"
+        herbstclient set  frame_border_active_color  "$bred"
+    fi
+
+    get_panel
+    if xrandr | grep -q "HDMI1 disconnected"; then
+
+	if [[ $paneltype == polybar ]]; then
+            xGAP=30
+	    yGAP=30
+	else
+	    xGAP=30
+            yGAP=50
+	fi
+
+    else
+
+	if [[ $paneltype == polybar ]]; then
+            xGAP=50
+	    yGAP=40
+	else
+	    xGAP=50
+            yGAP=50
+	fi
+
+    fi
+
+    {
+        if ! test -z $GTK; then
+            cd ~/.config/css
+            xstow -D dark
+            xstow -D light
+            xstow $GTK
+        fi
+    }
+    
+    {
+
+	killall /usr/lib/xfce4/notifyd/xfce4-notifyd > /dev/null 2>&1 
+	
+        killall dunst 
+        dunst -lf $fg  -nf $fg  -cf $red \
+              -lb $bg  -nb $bg  -cb $bg \
+              -geometry "0x0-$xGAP+$yGAP" \
+              -config ~/.dunstrc 2> /dev/null
+    } > /dev/null 2>&1 &
+
+    # killall lemonbar
+    # ps aux | awk '{print $12 " " $2}' | grep "^/home/blair/bin/panel"  | awk '{print $2}' | xargs kill -9
+    # panel &
+
+    # ps aux | awk '{print $12 " " $2}' | grep "^/home/blair/bin/panel2" | awk '{print $2}' | xargs kill -9
+}
+
+
+
+
+
+
+
+change_color () {
+  case $1 in
+  color*)
+    send_osc 4 "${1#color};$2" ;;
+  foreground)
+    send_osc 10 "$2" ;;
+  background)
+    send_osc 11 "$2" ;;
+  cursor)
+    send_osc 12 "$2" ;;
+  mouse_foreground)
+    send_osc 13 "$2" ;;
+  mouse_background)
+    send_osc 14 "$2" ;;
+  highlight)
+    send_osc 17 "$2" ;;
+  border)
+    send_osc 708 "$2" ;;
+  esac
+}
+
+send_escape_sequence () {
+    ESC="\033"
+    DSC="${ESC}P"
+    escape_sequence="$1"
+
+    # wrap escape sequence when within a TMUX session
+    [ ! -z "$TMUX" ] && escape_sequence="${DSC}tmux;${ESC}${escape_sequence}${ESC}\\"
+
+    printf "${escape_sequence}"
+}
+
+send_osc () {
+    ESC="\033"
+    BEL="\007"
+    OSC="${ESC}]"
+    Ps=$1
+    Pt=$2
+    command="$OSC$Ps;$Pt$BEL"
+    send_escape_sequence $command
+}
+
+
+
+refresh-terminal () {
+    colors=( background foreground cursor mouse_background mouse_foreground highlight border color0 color1 color2 color3 color4 color5 color6 color7 color8 color9 color10 color11 color12 color13 color14 color15 )
+    color_names=( black red green yellow blue magenta cyan white brblack brred brgreen bryellow brblue brmagenta brcyan brwhite )
+    for color in ${colors[@]}; do
+        [[ ${!color} ]] && change_color "$color" "${!color}"
+    done
+}
+
+
+
+
+get_font () {
+    if [ -f $save_font ]; then
+	      fn=$(cat $save_font)
+    else
+	      fn="screen-9"
+    fi
+}
+
+
+
+
+
+get_panel () {
+    if [ -f $save_panel ]; then
+	      panel=$(cat $save_panel)
+    else
+	      panel="true"
+    fi
+}
+
+
+
+set_panel () {
+
+    case $1 in
+        true|false)
+            echo $1 > $save_panel
+            ;;
+    esac
+
+}
+
+
+set_paneltype () {
+    echo $@ > $save_paneltype
+}
+
+get_paneltype () {
+
+    if [ -f $save_paneltype ]; then
+	      paneltype=$(cat $save_paneltype)
+    else
+	      paneltype="polybar"
+    fi
+
+}
+
+
+
+
+toggle_panel () {
+
+    if [ -f $save_panel ]; then
+	      panel=$(cat $save_panel)
+    else
+	      panel="true"
+    fi
+
+    if [[ $panel == true ]]; then
+        echo false > $save_panel
+    else
+        echo true > $save_panel
+    fi
+
+}
+
+
+maybe_load_panel () {
+
+    get_panel
+    if [[ $panel == true ]]; then
+        load_panel
+    else
+        herbstclient pad 0 0
+        kill_panel
+    fi
+
+}
+
+
+load_panel () {
+
+    get_paneltype
+    
+    if [[ $paneltype == polybar ]]; then
+	# herbstclient pad 0 0 0 0 0 
+	# defaultpanel="panel-l.sh"
+	# panelcmd="${1:-$defaultpanel}"
+
+	kill_panel
+
+        sleep .5
+
+	herbstclient pad 0 24 0 18 0
+	
+        if ! pgrep -x polybar; then
+        	polybar topbar &
+        	polybar botbar &
+        else
+        	pkill -USR1 polybar
+        fi
+
+	# herbstclient emit_hook quit_panel
+
+	# for i in $(herbstclient list_monitors | cut -d':' -f1) ; do
+	# "$panelcmd" $i &
+	# done
+    else
+	herbstclient pad 0 32 0 32 0
+	xfce4-panel > /dev/null 2>&1 &
+    fi
+
+}
+
+
+
+kill_panel () {
+
+    # killall xfce4-panel
+    # herbstclient emit_hook quit_panel
+    pgrep polybar | xargs kill
+    
+    # ps aux | awk '{print $2, $12}' | grep "/home/blair/scripts/.xcore/panel.sh" | awk '{print $1}' | xargs -exec kill -9
+    # ps aux | awk '{print $2, $12}' | grep "/home/blair/scripts/.xcore/panel-l.sh" | awk '{print $1}' | xargs -exec kill -9
+
+}
+
+
+
+
+
+
+
+style () {
+
+    case $1 in
+	"")
+	    echo "bitmap
+wallpaper"
+	    exit 0
+	;;
+        wallpaper)
+            rm $no_wallpaper
+            ;;
+
+        bitmap)
+            touch $no_wallpaper
+            ;;
+
+        *)
+            echo NOT A COMMAND
+            exit 1
+            ;;
+    esac
+
+}
+
+
+run () {
+
+    case $1 in
+
+	list)
+	    ls $colors_dir
+	    ;;
+
+        font)
+	    if test -n "$2"; then
+		fn="$2"
+	    else
+		get_font
+	    fi
+
+	    #            test -n "$fn" && xrdb -merge <(echo "st.font: $fn
+	    #st.bold_font: $fn")
+            test -n "$fn" && xrdb -merge <(echo "st.font: $fn")
+            pkill -USR1 -x st
+	    echo $fn > $save_font
+            ;;
+
+	current)
+	    get_theme
+	    echo $theme
+	    ;;
+
+
+	refresh-terminal)
+	        get_theme
+		load_theme
+		refresh-terminal
+		;;
+	
+	theme)
+	    if test -n "$2"; then
+                # killall gifview > /dev/null 2>&1 &
+		theme=$(echo $2 | sed 's/\(.*\)\.sh$/\1/g')
+	    else
+		get_new_theme
+	    fi
+	    load_theme
+	    echo $theme > $save_theme
+	    wallpaper
+	    recolor
+	    maybe_load_panel
+	    ;;
+
+	init)
+	    #style $default_style
+	    get_theme
+	    load_theme
+	    wallpaper
+	    recolor
+	    maybe_load_panel
+	    ;;
+
+	dmenu)
+	    sel=$(echo "theme bitmap invert notify css font" | sed 's/ /\n/g' | 9menu)
+	    case $sel in
+		theme|bitmap)
+		    chtheme $sel
+		    ;;
+                font)
+		    fn=$(echo "screen-9 screen-11 gohufont-9 gohufont-11 terminus-14 screen-bold10" | sed 's/ /\n/g' | 9menu)
+		    test -n "$fn" || exit 0
+                    chtheme font $fn
+                    ;;
+		style|notify)
+		    chtheme $sel $(chtheme $sel | 9menu)
+		    ;;
+		invert)
+		    chtheme invert
+		    ;;
+		css)
+
+	            sel=$(echo "light dark" | sed 's/ /\n/g' | 9menu)
+                    case $sel in
+                        light|dark)
+                            [ -d ~/.config/css ] || (echo NO CSS && exit 1)
+                            cd ~/.config/css
+                            xstow -D light
+                            xstow -D dark
+                            xstow $sel
+                            ;;
+                        *)
+                            exit 0
+                            ;;
+                    esac
+		    ;;
+		*)
+		    exit 0
+		    ;;
+	    esac
+	    ;;
+
+
+	panel)
+	    case $2 in
+		
+		true|false)
+		    set_panel $2
+		    maybe_load_panel
+		    ;;
+		toggle)
+		    toggle_panel
+		    maybe_load_panel
+		    ;;
+
+		init)
+		    maybe_load_panel
+		    ;;
+
+		polybar)
+		    set_paneltype polybar
+		    kill_panel
+		    load_panel
+		    ;;
+
+		xfce4)
+		    set_paneltype xfce4
+		    kill_panel
+		    load_panel
+		    ;;
+
+	    esac
+	    ;;
+
+	bitmap)
+	    if test -n "$2"; then
+		bm=$(echo $2 | sed 's/\(.*\)\.xbm$/\1/g')
+	    else
+		select_bitmap
+	    fi
+	    # killall gifview > /dev/null 2>&1 &
+	    echo "$bm.xbm" > $save_bitmap
+	    get_theme
+	    load_theme
+	    bitmap
+	    ;;
+
+	invert)
+	    if [ -f ~/.themes/invert ]; then
+                rm ~/.themes/invert
+            else
+                touch ~/.themes/invert
+            fi
+	    get_theme
+	    load_theme
+	    bitmap
+	    ;;
+
+	style)
+	    style $2
+	    get_theme
+	    load_theme
+            case $2 in
+                bitmap)
+                    herbstclient attr theme.tiling.border_width 2
+                    herbstclient attr theme.floating.border_width 4
+                    ;;
+                wallpaper)
+                    herbstclient attr theme.tiling.border_width 3
+                    herbstclient attr theme.floating.border_width 4
+                    ;;
+            esac
+            wallpaper
+	    ;;
+
+	notify)
+	    case $2 in
+		"")
+		    echo "on
+off"
+		    ;;
+		on)
+                    killall -SIGUSR2 dunst
+		    ;;
+		off)
+                    killall -SIGUSR1 dunst
+		    ;;
+	    esac
+	    ;;
+
+
+	"")
+	    echo "
+theme
+bitmap
+invert
+css
+font
+"| sed '/^$/d'
+            exit 0
+            ;;
+	*)
+            echo PASS AN ARGUMENT
+	    exit 1
+	    ;;
+    esac
+}
+
+run $@ 2> /dev/null

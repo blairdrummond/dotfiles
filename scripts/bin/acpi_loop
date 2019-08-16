@@ -1,0 +1,9 @@
+#!/bin/bash
+coproc acpi_listen
+trap 'kill $COPROC_PID' EXIT
+
+while read -u "${COPROC[0]}" -a event; do
+	  if [[ "${event[@]}" = "button/lid LID close" ]]; then
+	  	  block
+	  fi
+done

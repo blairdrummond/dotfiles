@@ -1,0 +1,17 @@
+#!/bin/sh
+
+tmux_run="$(tmux list-sessions | grep -v attached | awk -F ':' '{print $1}')"
+
+test -z $tmux_run && exit 0
+
+prompt="tmux-session:"
+
+spawn_local() {
+    st -e tmux attach-session -t "$1"
+}
+
+target=$(echo $tmux_run | sed 's/ /\n/g' | sort -u | dmenu -i -p "$prompt")
+
+if [ -n $target ]; then
+    spawn_local $target
+fi

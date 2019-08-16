@@ -1,0 +1,26 @@
+#!/bin/sh
+
+DIR=/home/blair/desk/cur/bdrummond
+
+[ -d $DIR ] || exit 1
+
+if [ -f $DIR/bib.bib ] && (bibtex2html --version >/dev/null 2>&1); then
+    echo "Generating Bibliography"
+    bibtex2html -q -noheader -nodoc -nokeywords -noabstract -nobibsource -d -o - \
+        $DIR/bib.bib | head -n -2 > $DIR/bib.html 2>/dev/null
+    if [ $? = 1 ]; then
+        echo "Bibliography generation failed!"
+        echo "" > $DIR/bib.html
+    else 
+        echo "</table>" >> $DIR/bib.html
+    fi
+else
+    echo "No Bibliography Found!"
+    echo "" > $DIR/bib.html
+fi
+
+echo "Generating html from org file."
+emacsclient -s /tmp/emacs1000/gui -e "(progn (find-file \"$DIR/index.org\") (org-html-export-to-html))" >/dev/null
+
+echo "Uploading..."
+rsync -rvhi /home/blair/desk/cur/bdrummond/ bdrummond:/home/bdruhrkl/www/

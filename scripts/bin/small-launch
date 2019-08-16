@@ -1,0 +1,5 @@
+#!/bin/sh
+
+test -n "$@" || exit 0
+st -g 42x80 -f gohufont-9 -n ignore_this_vmail -e "$@" &
+

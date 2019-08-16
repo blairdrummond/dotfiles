@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ls -ht /mnt/media/music/ | less
+# ls -ht /mnt/media/music/ | sed "s/'//"

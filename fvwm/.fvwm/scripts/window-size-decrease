@@ -1,0 +1,32 @@
+#!/bin/bash
+
+class=$1
+width=$2
+height=$3
+
+source "${mtp_scripts}/window-size-workaround"
+
+function decrease {
+	current=$1
+	width=$2
+	height=$3
+	target=$(( $width * $height ))
+
+	if [ $current -gt $target ]
+	then
+		echo "ResizeMove ${width}p ${height}p 50-50w 50-50w"
+		exit
+	fi
+}
+
+current=$(( $width * $height ))
+
+echo "Raise"
+
+decrease $current 1280 1024
+decrease $current 1024 768
+decrease $current 960 600
+decrease $current 800 600
+
+echo "ResizeMove 800p 600p 50-50w 50-50w"
+

@@ -1,0 +1,105 @@
+#!/bin/sh
+
+sel () {
+ { 
+    # echo "qutebrowser"
+    echo "chromium-browser"
+    echo "block"
+    echo "slock"
+    echo "browze"
+    echo "signal-desktop"
+    echo "discord"
+    echo "firefox"
+    echo "passmenu"
+    echo "pcmanfm"
+    echo "emacs-gui"
+    echo "emacs-26.1"
+    echo "xournal"
+    echo "bookmark.sh"
+    echo "font-select"
+    echo "xcaliber"
+    echo "bitmap-select"
+    echo "treemind.sh"
+    
+
+    echo "group-music"
+    echo "group-mail"
+    echo "group-todo"
+    echo "group-chat"
+
+    echo "nmtui"
+    echo "vd"
+    echo "nmcli con up id eduroam"
+    echo "nmcli con up id somerset-home"
+    echo "irc-connect"
+    echo "ncmpcpp"
+    echo "mutt"
+    # echo "theme"
+    echo "htop"
+    echo "ranger"
+    echo "w3m"
+    echo "cal"
+    # echo "thunar"
+    echo "pulsemixer"
+    echo "mpc play"
+    echo "mpc pause"
+    echo "mpc toggle"
+    echo "mpc next"
+    echo "mpc prev"
+
+    echo "sudo shutdown -r now"
+    echo "sudo shutdown -h now"
+    echo "what-am-i-doing"
+    echo "-"
+    dmenu_path; 
+    } | dmenu -p "run:"
+}
+
+
+c=$(sel)
+test -n "$c" || exit 0
+
+
+case $c in
+    treemind.sh)
+	st -g 42x80 -f gohufont-9 -n ignore_this_treemind -e treemind.sh &
+	;;
+	
+    group-music) 
+        st -e pulsemixer &
+        st -e ncmpcpp &
+        st -e whats-new &
+	;;
+
+    group-mail) 
+        st -e tmux new-session mutt &
+        st -e tmux new-session plan mail loop &
+	;;
+
+    group-todo) 
+        st -e tmux new-session plan cal loop &
+        st -e tmux new-session plan remind loop &
+        st -e tmux new-session plan todo loop &
+        st -e tmux new-session vim "$HOME/desk/remind/anomalous.rem" &
+	;;
+
+    group-chat)
+	signal-desktop &
+	discord &
+	;;
+
+    w3m)
+        st -e w3m www.duckduckgo.com
+        ;;
+    cal)
+	reminder-web
+        st -e w3m /tmp/remind.html 
+	;;
+    irc-connect|ncmpcpp|mutt|htop|ranger|theme|nmtui|pulsemixer)
+        # st -e tmux new-session $c
+        st -e $c
+        ;;
+    *)
+        exec $c
+        ;;
+esac

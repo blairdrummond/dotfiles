@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Exclusively for use by massren
+# Solution to issue #27
+
+vim $@
+
+while [ $# -gt 0 ]; do
+    [ -f "$1" ] && touch "$1"
+    shift
+done

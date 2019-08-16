@@ -1,0 +1,131 @@
+#!/bin/sh
+
+battery () {
+    while true; do
+	p=$(acpi --battery \
+		   | cut -d "," -f 2 \
+		   | sed 's/[ %]//g')
+
+
+	after=$(acpi --battery \
+		      | awk '{$1=$2=""; print $0}'     \
+		      | awk -F "," '{print $1}' \
+                      | sed 's/^ *//g')
+
+
+	if [ $p -le 20 ]; then
+	    urgency=critical
+	else
+	    urgency=normal
+	fi
+
+
+	if [ $p != $old_p ]; then
+	    [ $p -le 20 ] && test $after = Discharging && notify-send "$after" --urgency $urgency
+
+	# unplugged
+	elif test $after = Discharging && test $before != Discharging; then
+	    notify-send "$after" --urgency $urgency
+
+	    # plugged in
+	elif test $before = Discharging && test $after != Discharging; then
+	    notify-send "$after" --urgency $urgency
+	fi
+
+
+	before=$after
+	old_p=$p
+	sleep 10
+    done
+}
+
+
+
+
+
+email () {
+    while true; do
+	after=$(mail query)
+	if [ ! $before = $after ] && ! test -z $after; then
+	    [ $after -eq 0 ] || notify-send "unread mail ($after)" --urgency critical
+	fi
+	before=$after
+	sleep 30
+    done
+}
+
+
+
+
+
+
+music () {
+    before=""
+
+    while true; do
+	mpc idleloop |
+	    while read update; do
+		if [ `mpc | wc -l` -eq 1 ]; then
+		    after=""
+		else
+		    after=`mpc | head -n1 | awk -F "-" '{print $2 " - " $1 }'`
+		    test $before != $after && notify-send $after
+		fi
+		before=$after
+	    done
+    done
+}
+
+
+
+
+
+
+weather () {
+    sleep 30
+    while true; do
+	rain | while read line; do
+	    notify-send "$line" --expire-time 3600000 --urgency critical
+	done
+	sleep 3600
+    done
+}
+
+
+
+
+
+
+wifi () {
+    wifidev=`ip link | grep wlp | awk '{print $2}' | sed 's/\://g'`
+
+    iwconfig "$wifidev" 2>&1 | grep -q no\ wireless\ extensions\. && {
+	      echo wired
+	      exit 0
+    }
+
+    before=5
+    while true; do
+	      stngth=`iwconfig "$wifidev" | awk -F '=' '/Quality/ {print $2}' | cut -d '/' -f 1`
+	      after=`expr $stngth / 10`
+	      ssid=$(iwconfig "$wifidev" | head -n1 | awk '{print $4}' | cut -d ":" -f 2 | sed 's/"//g')
+
+	      test $before != $after && [ $after -ge 1 ] && [ $after -le 10 ] || notify-send "no Signal" -u critical
+	      [ $before -ge 1 -a $before -le 10 ] || [ $after -ge 1 -a $after -le 10 ] && notify-send "connected to $ssid"
+
+	      before=$after
+	      sleep 60
+    done
+}
+
+
+
+
+case $1 in
+    battery)  battery  ;;
+    email)    email    ;;
+    music)    music    ;;
+    weather)  weather  ;;
+    wifi)     wifi     ;;
+    *)        exit 1   ;;
+esac

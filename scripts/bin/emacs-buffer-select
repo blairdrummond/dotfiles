@@ -1,0 +1,10 @@
+#!/bin/sh
+
+sel=$(emacs-buffer-list $@ | dmenu -p "buffer:")
+test -n "$sel" || exit 0
+
+if [ "$1" = gui ]; then
+	emacs-gui -e "(switch-to-buffer \"$sel\")"
+else
+	st -e client -t -e "(switch-to-buffer \"$sel\")"
+fi

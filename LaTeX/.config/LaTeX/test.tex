@@ -1,0 +1,205 @@
+%%%                    ___           ___         ___                 
+%%%      ___          /__/\         /  /\       /__/\          ___   
+%%%     /  /\         \  \:\       /  /::\      \  \:\        /  /\  
+%%%    /  /:/          \  \:\     /  /:/\:\      \  \:\      /  /:/  
+%%%   /__/::\      _____\__\:\   /  /:/~/:/  ___  \  \:\    /  /:/   
+%%%   \__\/\:\__  /__/::::::::\ /__/:/ /:/  /__/\  \__\:\  /  /::\   
+%%%      \  \:\/\ \  \:\~~\~~\/ \  \:\/:/   \  \:\ /  /:/ /__/:/\:\  
+%%%       \__\::/  \  \:\  ~~~   \  \::/     \  \:\  /:/  \__\/  \:\ 
+%%%       /__/:/    \  \:\        \  \:\      \  \:\/:/        \  \:\
+%%%       \__\/      \  \:\        \  \:\      \  \::/          \__\/
+%%%                   \__\/         \__\/       \__\/                
+
+\input amstex
+
+
+
+
+
+
+
+%%%    
+%%%     ,gggggggggggggg                                     
+%%%    dP""""""88""""""                       I8            
+%%%    Yb,_    88                             I8            
+%%%     `""    88                          88888888         
+%%%         ggg88gggg                         I8            
+%%%            88   8,ggggg,    ,ggg,,ggg,    I8     ,g,    
+%%%            88   dP"  "Y8ggg,8" "8P" "8,   I8    ,8'8,   
+%%%      gg,   88  i8'    ,8I  I8   8I   8I  ,I8,  ,8'  Yb  
+%%%       "Yb,,8P ,d8,   ,d8' ,dP   8I   Yb,,d88b,,8'_   8) 
+%%%         "Y8P' P"Y8888P"   8P'   8I   `Y88P""Y8P' "YY8P8P
+%%%    
+                                                     
+
+\loadeufb     % ?
+\loadeufm     % Fraktur
+\loadeusm     % Symbols (?)
+\loadeusb     % ?
+\loadeurm     % Roman
+\loadeurb     % ?
+
+\font\footmi=eufm10 at 8truept
+\font\footsu=eusm10 at 8truept
+\font\footex=euex10 at 10truept
+\font\footsc=cmcsc10 at 8truept
+\font\footbf=cmbx10 at 8truept
+\font\footrm=cmr10 at 10truept
+\font\Bigbf=cmbx12 at 18pt
+\font\bigbf=cmbx12 at 16pt
+\font\medbf=cmbx12 at 14pt
+\font\medrm=cmr12 at 12pt
+
+\font\tenscr=rsfs10
+\font\sevenscr=rsfs7
+\font\fivescr=rsfs5
+\skewchar\tenscr='177 \skewchar\sevenscr='177 \skewchar\fivescr='177
+\newfam\scrfam \textfont\scrfam=\tenscr \scriptfont\scrfam=\sevenscr
+\scriptscriptfont\scrfam=\fivescr
+\def\scr#1{{\fam\scrfam#1}}
+
+
+
+
+
+
+%%%    
+%%%    8888888888                                      888    
+%%%    888                                             888    
+%%%    888                                             888    
+%%%    8888888  .d88b.  888d888 88888b.d88b.   8888b.  888888 
+%%%    888     d88""88b 888P"   888 "888 "88b     "88b 888    
+%%%    888     888  888 888     888  888  888 .d888888 888    
+%%%    888     Y88..88P 888     888  888  888 888  888 Y88b.  
+%%%    888      "Y88P"  888     888  888  888 "Y888888  "Y888 
+%%%                                                           
+
+
+\hsize = 5.5 true in
+\hoffset = .5in
+
+\vsize = 7.5 true in
+\voffset = 1in
+
+\openup 2pt
+
+% \magnification=\magstep1
+
+\global\hyphenpenalty=100
+% \overfullrule=0pt
+
+
+\def\nl{\hfil\break}
+
+\newcount\secnum
+\def\section#1\par{\global\advance\secnum by1
+   \csname beginsection\endcsname \medbf\the\secnum. #1\par}
+
+
+\def\today{\ifcase\month\or
+January\or February\or March\or April\or May\or June\or
+July\or August\or September\or October\or November\or December\fi
+\space\number\day, \number\year}
+
+\newtoks\title   
+\newtoks\subtitle   
+\newtoks\author 
+\newtoks\department
+\newtoks\university
+\newtoks\address 
+\newtoks\email  
+\newtoks\edinfo
+
+\def\printdata{\par
+   \centerline{\Bigbf\the\title}\medskip
+   \if^\the\subtitle^\else \centerline{\bigbf\the\subtitle}\fi\vskip2\baselineskip
+   \if^\the\author^\else \centerline{\medrm\the\author}
+   \if^\the\email^\else \smallskip\centerline{\tt\the\email}\fi\vskip2\baselineskip\fi
+   \if^\the\department^\else \centerline{\medrm\the\department}\fi
+   \if^\the\university^\else \centerline{\medrm\the\university}\bigskip\fi
+   \if^\the\address^\else \centerline{\the\address}\fi
+   \if^\the\edinfo^\else \bigskip
+      {\footrm \leftskip=0pt plus1fill \rightskip=\leftskip \the\edinfo\par}\fi
+   \vskip2\baselineskip
+}
+
+
+
+
+%%%    
+%%%      /$$$$$$                      /$$          
+%%%     /$$__  $$                    | $$          
+%%%    | $$  \__/ /$$$$$$/$$$$   /$$$$$$$  /$$$$$$$
+%%%    | $$      | $$_  $$_  $$ /$$__  $$ /$$_____/
+%%%    | $$      | $$ \ $$ \ $$| $$  | $$|  $$$$$$ 
+%%%    | $$    $$| $$ | $$ | $$| $$  | $$ \____  $$
+%%%    |  $$$$$$/| $$ | $$ | $$|  $$$$$$$ /$$$$$$$/
+%%%     \______/ |__/ |__/ |__/ \_______/|_______/ 
+%%%    
+                                            
+
+% \def\inftyint{\int_{-\infty}^{+\infty}}
+
+
+
+
+
+
+%%%   
+%%%   ███╗   ███╗███████╗████████╗ █████╗ 
+%%%   ████╗ ████║██╔════╝╚══██╔══╝██╔══██╗
+%%%   ██╔████╔██║█████╗     ██║   ███████║
+%%%   ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║
+%%%   ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║
+%%%   ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝
+%%%                                       
+
+
+\title { Assignment 3 }
+\subtitle { Ordinary Differential Equations }
+\author{ Blair Drummond }
+\department { Department of Mathematics } 
+\university{ University of Ottawa }
+% \address{ Solatido College, North Kentucky, USA }
+\email { 7306042 }
+% \edinfo     {Submitted: Jan 1, 2009; Accepted: Jan 2, 2009; Published: Jan 3, 2009\nl Mathematics Subject Classifications: 05C88, 05C89}
+
+\footline={\footsc \today \hfil}
+
+
+
+
+
+
+
+
+%%%                                                          
+%%%    ooo.                                               o  
+%%%    8  `8.                                             8  
+%%%    8   `8 .oPYo. .oPYo. o    o ooYoYo. .oPYo. odYo.  o8P 
+%%%    8    8 8    8 8    ' 8    8 8' 8  8 8oooo8 8' `8   8  
+%%%    8   .P 8    8 8    . 8    8 8  8  8 8.     8   8   8  
+%%%    8ooo'  `YooP' `YooP' `YooP' 8  8  8 `Yooo' 8   8   8  
+%%%   ......:::.....::.....::.....:..:..:..:.....:..::..::..:
+%%%   :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+%%%   :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+%%% 
+
+\printdata
+
+This is the start of the introduction.
+
+$$ {\scr A} {\frak A} = {\Cal A} = {\sin(5\pi i) \over \phi} $$
+
+\section 
+
+Question 1
+
+\section 
+
+Question 2
+
+
+
+
+\bye

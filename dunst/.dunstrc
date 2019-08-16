@@ -1,0 +1,60 @@
+[global]
+# font = screen 8
+font = terminus 10
+# font = tewi 8
+alignment = center
+
+# hide_duplicate_count = true
+# stack_duplicates = true
+icon_position = off
+allow_markup = yes
+format = "<b>%s</b>\n%b"
+sort = yes
+indicate_hiddenl= no
+hide_duplicates_count = true
+bounce_freq = 3
+show_age_threshold = -1
+word_wrap = no
+ignore_newline = no
+geometry = "0x0+10+10"
+transparency = 0
+idle_threshold = 120
+monitor = 0
+follow = mouse
+sticky_history = yes
+line_height = 0
+separator_height = 0
+
+padding = 10
+horizontal_padding = 10
+startup_notification = false
+
+# dmenu = rofi -dmenu
+# browser = /usr/bin/firefox -new-tab
+
+[frame]
+width = 2
+
+[shortcuts]
+close = ctrl+shift+space
+close_all = ctrl+space
+history = ctrl+shift+h
+
+[urgency_low]
+timeout = 10
+[urgency_normal]
+timeout = 10
+[urgency_critical]
+timeout = 0
+
+[volume]
+    summary = "volume*"
+    format = "%s %p"
+
+[MPC]
+    summary = "MPC"
+    format = "%b"
+
+[workspace]
+    summary = "workspace"
+    format = "%p"

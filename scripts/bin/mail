@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -f ~/mail/msmtp.log ] || exit 1
+
+/usr/bin/mail "$@"

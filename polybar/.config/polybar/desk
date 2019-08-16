@@ -1,0 +1,6 @@
+#!/bin/sh
+
+wew | while read line; do
+    cur=$(wmctrl -d | grep "*" | awk '{print $1+1}')
+    echo "1 2 3 4" | sed "s/$cur/*/"
+done

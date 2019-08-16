@@ -1,0 +1,24 @@
+#!/bin/sh
+
+cd ~/desk/.pia
+# sudo openvpn --config $(ls *.ovpn | shuf -n 1) &
+
+echo Unlocking .secrets
+gpg2 -d .secrets.gpg > .secrets
+
+echo sudo openvpn --config Default.ovpn
+sudo openvpn --config Default.ovpn
+
+if [ -f .secrets.gpg ]; then
+    rm .secrets
+else
+    echo "Where is the secrets file??"
+fi
+
+nmcli radio wifi off
+
+echo
+echo
+echo "To turn the wifi back on, run"
+echo
+echo     "$ nmcli radio wifi on"

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+monitor=${1:-0}
+
+theme=$(chtheme current)
+[ -f ~/.themes/colorschemes/$theme.sh ] && . ~/.themes/colorschemes/$theme.sh
+
+hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+
+hc pad 0 20 0 16
+hc pad 1 20 0 16 || true
+
+
+herbstclient --idle | grep --line-buffered "\(tag_changed\|quit_panel\)" |
+    while read line; do
+
+	[[ "$line" == quit_panel ]] && exit 0
+	
+	{
+	    IFS=$'\t' read -ra tags <<< "$(herbstclient tag_status)"
+	    j=0
+	    echo "%{c}"
+            for i in "${tags[@]}" ; do
+		[[ ! $j -eq 0 ]] && [[ $((j % 10)) -eq 0 ]] && echo "%{F$blu}   ~ %{F-}"
+		case ${i:0:1} in
+                    '#') echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:} %{F$red} $((${i:1}+1)) %{A}%{A}" ;;
+                    '+') echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:} %{F$mag} $((${i:1}+1)) %{A}%{A}" ;;
+		    ':') echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:} %{F$wht} $((${i:1}+1)) %{A}%{A}" ;;
+                    '-') echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:} %{F$red} $((${i:1}+1)) %{A}%{A}" ;;
+		    '!') echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:} %{F$red} $((${i:1}+1)) %{A}%{A}" ;;
+		    *)   echo " %{A3:herbstclient move_index ${i:1}:}%{A:herbstclient use_index ${i:1}:} %{F$blu} $((${i:1}+1)) %{A}%{A}" ;;
+		esac
+		((j++))
+            done
+	} | paste -sd " " -
+    done 2> /dev/null | lemonbar -b -a 60 -g "1920x16" -f 'tewi:size=8' -f 'Siji:size=8' -B "$bg" -F "$fg" -n 'bar' LVDS-1 | sh
