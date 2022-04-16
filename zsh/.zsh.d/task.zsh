@@ -1,0 +1,25 @@
+#compdef task
+
+# Listing commands from Taskfile.yml
+function __list() {
+    local -a scripts
+
+    if [ -f Taskfile.yml ] || [ -f Taskfile.yaml ]; then
+        scripts=($(task -l | sed '1d' | sed 's/^\* //' | awk '{ print $1 }' | sed 's/:$//' | sed 's/:/\\:/g'))
+        _describe 'script' scripts
+    fi
+}
+
+_arguments \
+    '(-d --dir)'{-d,--dir}': :_files' \
+    '(--dry)'--dry \
+    '(-f --force)'{-f,--force} \
+    '(-i --init)'{-i,--init} \
+    '(-l --list)'{-l,--list} \
+    '(-s --silent)'{-s,--silent} \
+    '(--status)'--status \
+    '(-v --verbose)'{-v,--verbose} \
+    '(--version)'--version \
+    '(-w --watch)'{-w,--watch} \
+    '(- *)'{-h,--help} \
+    '*: :__list' \

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+printf '[⎈ %s]\n' $(/usr/local/bin/kubectx -c)
+#echo SWAG
+#printf '[⎈ %s]\n' $(kubectx -c)
