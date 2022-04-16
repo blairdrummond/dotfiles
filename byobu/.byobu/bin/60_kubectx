@@ -1,5 +1,5 @@
 #!/bin/sh
 
-printf '[⎈ %s]\n' $(/usr/local/bin/kubectx -c)
+printf ' #[bg=magenta,fg=white,bold]⎈:%s#[default]\n' $(/usr/local/bin/kubectx -c)
 #echo SWAG
 #printf '[⎈ %s]\n' $(kubectx -c)
