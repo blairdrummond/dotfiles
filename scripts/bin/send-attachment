@@ -1,3 +1,0 @@
-#!/bin/sh
-
-echo print | mutt -s "Attachment \"$@\"" -a "$@" -- blair.robert.drummond@gmail.com

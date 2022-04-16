@@ -1,3 +1,0 @@
-#!/bin/sh
-
-column -s, -n -t < "$@" | less -#2 -N -S

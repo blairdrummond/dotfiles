@@ -1,9 +1,0 @@
-#!/bin/sh
-
-[ -f $1 ] || exit 1
-FILE=$1
-
-cat /dev/stdin |
-    while read line; do
-	grep -q "^$line" "$FILE" || echo $line
-    done

@@ -1,3 +1,0 @@
-#/bin/sh
-
-xsnow -notrees -nowind -nosanta -norudolf -nokeepsnow -yspeed 1 -xspeed 1 -snowflakes 300 -delay 50

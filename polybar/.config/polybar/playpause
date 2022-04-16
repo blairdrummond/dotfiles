@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if ! tinympc > /dev/null; then
-    echo ""
-    # echo ""
-else
-    echo ""
-    # echo ""
-fi

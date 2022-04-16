@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if echo $1 | grep '^\.'; then
-    new=$(echo $1 | sed 's/^\.\(.*\)/\1/')
-    mv $1 $new
-else
-    mv $1 .$1
-fi

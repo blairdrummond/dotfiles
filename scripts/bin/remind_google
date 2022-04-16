@@ -1,4 +1,0 @@
-#!/bin/sh
-
-remind -s360 -irem2ics=1 ~/desk/remind/top.rem | TZ=US/Eastern ./rem2ics
--do > ~/tmp/reminders.ics

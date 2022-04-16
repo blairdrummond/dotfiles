@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if test -n "$@"; then
-    recode -d ..TeX "$@"
-else
-    cat /dev/stdin | recode -d ..TeX
-fi
-
-# Bonne Soirée

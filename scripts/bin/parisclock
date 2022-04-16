@@ -1,5 +1,0 @@
-#!/bin/sh
-
-TZ=Europe/Paris xclock -digital -strftime " paris: %a, %b %e, %H:%M "  -face "gohufont-11" &
-
-xclock -digital -strftime " toronto: %a, %b %e, %H:%M "  -face "gohufont-11" &

@@ -1,3 +1,0 @@
-#!/bin/sh
-
-find -name "*.flac" -exec ffmpeg -i {} -acodec libmp3lame -ab 128k {}.mp3 \;

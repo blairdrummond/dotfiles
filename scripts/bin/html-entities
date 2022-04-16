@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# https://stackoverflow.com/questions/5929492/bash-script-to-convert-from-html-entities-to-characters
-
-if test -n "$@"; then
-    cat "$@" | python3 -c 'import html, sys; [print(html.unescape(l), end="") for l in sys.stdin]'
-else
-    cat /dev/stdin | python3 -c 'import html, sys; [print(html.unescape(l), end="") for l in sys.stdin]'
-fi

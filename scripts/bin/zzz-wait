@@ -1,7 +1,0 @@
-#!/bin/sh
-
-tinympc && exit 0
-
-ps aux | grep ffplay | grep -v grep && exit 0
-
-st -e zzz-ask

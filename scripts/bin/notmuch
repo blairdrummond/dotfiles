@@ -1,5 +1,0 @@
-#!/bin/sh
-
-[ -d ~/mail/gmail ] || exit 0
-
-/usr/bin/notmuch "$@"

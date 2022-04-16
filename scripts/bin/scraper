@@ -1,6 +1,0 @@
-#!/bin/sh
-
-lynx -image_links -dump "$1" |
-    grep '\. https\?://.*\.\(gif\|jpg\|png\)$' |
-    cut -d . -f 2- |
-    cut -d ' ' -f 2-

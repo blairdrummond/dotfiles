@@ -1,4 +1,0 @@
-#!/bin/sh
-
-[ $# -eq 0 ] || notify-send "$@" 
-/usr/bin/ffplay -nodisp -autoexit /home/blair/desk/.beep.mp3 > /dev/null 2>&1

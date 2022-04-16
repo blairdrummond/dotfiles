@@ -1,5 +1,0 @@
-#!/bin/sh
-
-[ -d ~/mail ] || exit 0
-
-/usr/bin/mbsync "$@"

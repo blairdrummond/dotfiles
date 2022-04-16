@@ -1,9 +1,0 @@
-#!/bin/bash
-
-test -n "$1" || exit 1
-test -n "$2" || exit 1
-
-xrdb -merge <(echo "
-    st.cwscale: $1
-    st.chscale: $2
-")
